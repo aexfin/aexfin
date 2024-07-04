@@ -1,0 +1,1 @@
+<----- This is [**Guts**](https://berserk.fandom.com/wiki/Guts) from the [**Berserk**](https://berserk.fandom.com/wiki/Berserk_Wiki) manga series.
