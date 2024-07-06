@@ -16,6 +16,7 @@ type Track = {
 }
 
 export default async function About() {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   const response = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=aexfin&api_key=${process.env.API_KEY}&limit=1&format=json`,
     {
       cache: "no-store",
