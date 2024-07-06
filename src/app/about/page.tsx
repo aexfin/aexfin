@@ -33,7 +33,7 @@ export default async function About() {
         <a href="https://github.com/aexfin"  className="text-neutral-100 text-4xl p-1 font-black tracking-wider cursor-crosshair">
         <h1>@aexfin</h1>
         </a>
-        <p className="p-1 text-neutral-500">pixels; frames; nodes; vertices</p>
+        <p className="p-1 mb-4 text-neutral-500">pixels; frames; nodes; vertices</p>
         <p>some stuffs i can do(very efficiently):</p>
         <ul>
           <li><p className="text-neutral-400">- write programs</p></li>
