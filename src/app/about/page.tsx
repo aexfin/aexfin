@@ -26,7 +26,7 @@ export default async function About() {
   const track: Track = data.recenttracks.track[0];
   return (
     <main className="flex flex-col items-center justify-between p-6">
-      <img src="https://github.com/aexfin.png" alt="aexfin" className="w-60 rounded-full border-2 border-neutral-500 pointer-events-none"/>
+      <img src="https://github.com/aexfin.png" alt="aexfin" className="w-60 rounded-full border-2 border-neutral-900 pointer-events-none"/>
       
       <div className="flex flex-col items-center justify-between m-4">
         <a href="https://github.com/aexfin"  className="text-neutral-100 text-4xl p-1 font-black tracking-wider cursor-crosshair">
@@ -44,9 +44,9 @@ export default async function About() {
       </div>
 
       <div className="flex flex-row items-center justify-between px-2 py-2 bg-neutral-950 border-2 border-neutral-900 rounded-md">
-        <img src={track.image[3]["#text"]} alt="track" className="w-20 h-auto rounded-md"/>
+        <img src={track.image[3]["#text"]} alt="track" className="w-20 h-auto rounded-md border-2 border-neutral-900"/>
         <div className="flex flex-col">
-          <h2 className={`${Boolean(track["@attr"]?.nowplaying) === true ? "now-playing" : "last-played"} px-2 text-xs text-neutral-500`}></h2>
+          <h2 className={`${Boolean(track["@attr"]?.nowplaying) === true ? "now-playing" : "last-played"} px-2 text-xs text-neutral-500 text-`}></h2>
           <h2 className="px-2 py-0 text-lg tracking-wide">{track.name}</h2>
           <h2 className="px-2 text-xs text-neutral-400">by {track.artist["#text"]}</h2>
         </div>
