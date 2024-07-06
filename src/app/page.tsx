@@ -7,7 +7,7 @@ export default async function Home() {
       <img src="https://github.com/aexfin.png" alt="aexfin" className="w-60 rounded-full border-2 border-neutral-900 pointer-events-none"/>
       
       <div className="flex flex-col items-center justify-between m-4">
-        <a href="https://github.com/aexfin"  className="text-neutral-100 text-4xl p-1 font-black tracking-wider cursor-crosshair">
+        <a href="https://github.com/aexfin" target="_blank" className="text-neutral-100 text-4xl p-1 font-black tracking-wider cursor-crosshair">
         <h1>@aexfin</h1>
         </a>
         <p className="p-1 text-neutral-500">pixels; frames; nodes; vertices</p>
@@ -35,13 +35,13 @@ export default async function Home() {
       </div>
 
       <div className="flex flex-col my-2">
-        <Link href="https://github.com/aexfin" className="px-16 py-3 m-2 text-lg bg-neutral-950 text-neutral-500 rounded-md border-2 border-neutral-900 duration-300 hover:text-neutral-50 hover:bg-neutral-800 cursor-crosshair">
+        <Link href="https://github.com/aexfin" target="_blank" className="px-16 py-3 m-2 text-lg bg-neutral-950 text-neutral-500 rounded-md border-2 border-neutral-900 duration-300 hover:text-neutral-50 hover:bg-neutral-800 cursor-crosshair">
           socials/<span className="text-neutral-50">github</span>
         </Link>
-        <Link href="https://discord.com/users/1028983693269815296/" className="px-16 py-3 m-2 text-lg bg-neutral-950 text-neutral-500 rounded-md border-2 border-neutral-900 duration-300 hover:text-neutral-50 hover:bg-neutral-800 cursor-crosshair">
+        <Link href="https://discord.com/users/1028983693269815296/" target="_blank" className="px-16 py-3 m-2 text-lg bg-neutral-950 text-neutral-500 rounded-md border-2 border-neutral-900 duration-300 hover:text-neutral-50 hover:bg-neutral-800 cursor-crosshair">
           socials/<span className="text-neutral-50">discord</span>
         </Link>
-        <Link href="https://steamcommunity.com/profiles/76561199387769792" className="px-16 py-3 m-2 text-lg bg-neutral-950 text-neutral-500 rounded-md border-2 border-neutral-900 duration-300 hover:text-neutral-50 hover:bg-neutral-800 cursor-crosshair">
+        <Link href="https://steamcommunity.com/profiles/76561199387769792" target="_blank" className="px-16 py-3 m-2 text-lg bg-neutral-950 text-neutral-500 rounded-md border-2 border-neutral-900 duration-300 hover:text-neutral-50 hover:bg-neutral-800 cursor-crosshair">
           socials/<span className="text-neutral-50">steam</span>
         </Link>
       </div>
