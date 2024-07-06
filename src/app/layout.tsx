@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en" className={`${powerGrotesk.className} cursor-crosshair`}>
       <body className="flex flex-col items-center justify-between">
         {children}
-        <div className="fixed bottom-0 m-4 p-2 flex flex-row bg-neutral-950 rounded-full border-2 border-neutral-900">
+        <div className="fixed bottom-0 m-4 p-2 flex flex-row bg-transparent backdrop-blur-2xl rounded-full border-2 border-neutral-900">
           <Link href="/about" className="px-16 text-lg text-neutral-500 cursor-crosshair duration-300 hover:text-neutral-50">
             @aexfin/<span className="text-neutral-50">about</span>
           </Link>
