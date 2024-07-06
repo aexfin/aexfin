@@ -31,3 +31,11 @@ body {
     text-wrap: balance;
   }
 }
+
+.now-playing::after {
+  content: 'Now Playing';
+}
+
+.last-played::after {
+  content: 'Last Played';
+}

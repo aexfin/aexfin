@@ -1,11 +1,29 @@
-export default async function About() {
-  const response = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=aexfin&api_key=${process.env.API_KEY}&limit=1&format=json`);
-  const data = await response.json();
-  const track = data.recenttracks.track[0];
+type Track = {
+  artist: {
+    "#text": string;
+  };
+  image: [
+    {}, {}, {},
+    {
+      size: string;
+      "#text": string;
+    }
+  ];
+  name: string;
+  "@attr": {
+    nowplaying: string;
+  }
+}
 
-  const artist = track["artist"]["#text"];
-  const name = track["name"];
-  const image = track["image"][3]["#text"];
+export default async function About() {
+  const response = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=aexfin&api_key=${process.env.API_KEY}&limit=1&format=json`,
+    {
+      cache: "no-store",
+      method: "GET",
+    }
+  );
+  const data = await response.json();
+  const track: Track = data.recenttracks.track[0];
   return (
     <main className="flex flex-col items-center justify-between p-6">
       <img src="https://github.com/aexfin.png" alt="aexfin" className="w-60 rounded-full border-2 border-neutral-500 pointer-events-none"/>
@@ -26,11 +44,11 @@ export default async function About() {
       </div>
 
       <div className="flex flex-row items-center justify-between px-2 py-2 bg-neutral-800 rounded-md">
-        <img src={image} alt="track" className="w-20 h-auto rounded-md"/>
+        <img src={track.image[3]["#text"]} alt="track" className="w-20 h-auto rounded-md"/>
         <div className="flex flex-col">
-          <h2 className="px-2 text-xs text-neutral-500">Last Played</h2>
-          <h2 className="px-2 py-0 text-lg">{name}</h2>
-          <h2 className="px-2 text-xs text-neutral-400">by {artist}</h2>
+          <h2 className={`${Boolean(track["@attr"]?.nowplaying) === true ? "now-playing" : "last-played"} px-2 text-xs text-neutral-500`}></h2>
+          <h2 className="px-2 py-0 text-lg tracking-wide">{track.name}</h2>
+          <h2 className="px-2 text-xs text-neutral-400">by {track.artist["#text"]}</h2>
         </div>
       </div>
     </main>
