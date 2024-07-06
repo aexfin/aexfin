@@ -43,7 +43,7 @@ export default async function About() {
         </ul>
       </div>
 
-      <div className="flex flex-row items-center justify-between px-2 py-2 bg-neutral-800 rounded-md">
+      <div className="flex flex-row items-center justify-between px-2 py-2 bg-neutral-950 border-2 border-neutral-900 rounded-md">
         <img src={track.image[3]["#text"]} alt="track" className="w-20 h-auto rounded-md"/>
         <div className="flex flex-col">
           <h2 className={`${Boolean(track["@attr"]?.nowplaying) === true ? "now-playing" : "last-played"} px-2 text-xs text-neutral-500`}></h2>
