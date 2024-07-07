@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 type Repository = {
   id: string;
   name: string;
@@ -6,6 +8,17 @@ type Repository = {
   description: string;
   stargazers_count: number;
   language: string;
+}
+
+export const metadata: Metadata = {
+  title: "@aexfin's projects",
+  description: "a bunch of information about @aexfin's projects 👾",
+  openGraph: {
+    title: "@aexfin's projects",
+    description: "a bunch of information about @aexfin's projects 👾",
+    url: "https://aexfin.vercel.app/projects",
+    siteName: "aexfin's projects 👾"
+  }
 }
 
 export default async function Projects() {
