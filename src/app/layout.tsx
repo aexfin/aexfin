@@ -12,11 +12,13 @@ export const metadata: Metadata = {
     icon: "https://github.com/aexfin.png",
   },
   openGraph: {
+    title: "@aexfin",
+    description: "a bunch of information about me 👾",
     type: "profile",
     images: [
       "https://github.com/aexfin.png"
     ],
-    url: "https://github.com/aexfin",
+    url: "https://aexfin.vercel.app",
     siteName: "aexfin 👾",
   }
 };
