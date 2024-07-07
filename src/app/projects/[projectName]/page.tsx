@@ -1,4 +1,3 @@
-import Loading from "@/app/loading";
 import { notFound } from "next/navigation";
 
 type Repository = {

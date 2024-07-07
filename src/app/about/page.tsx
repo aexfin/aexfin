@@ -1,5 +1,16 @@
 import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "about @aexfin",
+  description: "a bit more information about @aexfin 👾",
+  openGraph: {
+    title: "about @aexfin",
+    description: "a bit more information about @aexfin 👾",
+    url: "https://aexfin.vercel.app/about",
+    siteName: "about aexfin 👾"
+  }
+}
+
 type Track = {
   artist: {
     "#text": string;
@@ -14,17 +25,6 @@ type Track = {
   name: string;
   "@attr": {
     nowplaying: string;
-  }
-}
-
-export const metadata: Metadata = {
-  title: "about @aexfin",
-  description: "a bit more information about @aexfin 👾",
-  openGraph: {
-    title: "about @aexfin",
-    description: "a bit more information about @aexfin 👾",
-    url: "https://aexfin.vercel.app/about",
-    siteName: "about aexfin 👾"
   }
 }
 

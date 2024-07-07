@@ -1,16 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
-type Repository = {
-  id: string;
-  name: string;
-  full_name: string;
-  html_url: string;
-  description: string;
-  stargazers_count: number;
-  language: string;
-}
-
 export const metadata: Metadata = {
   title: "@aexfin's projects",
   description: "a bunch of information about @aexfin's projects 👾",
@@ -20,6 +10,16 @@ export const metadata: Metadata = {
     url: "https://aexfin.vercel.app/projects",
     siteName: "aexfin's projects 👾"
   }
+}
+
+type Repository = {
+  id: string;
+  name: string;
+  full_name: string;
+  html_url: string;
+  description: string;
+  stargazers_count: number;
+  language: string;
 }
 
 export default async function Projects() {
