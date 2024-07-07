@@ -7,16 +7,17 @@ const powerGrotesk = localFont({src: "../../public/Power-Grotesk.ttf"});
 
 export const metadata: Metadata = {
   title: "@aexfin",
-  description: "aexfin",
+  description: "a bunch of information about me 👾",
   icons: {
     icon: "https://github.com/aexfin.png",
   },
   openGraph: {
-    title: "@aexfin",
     type: "profile",
     images: [
       "https://github.com/aexfin.png"
-    ]
+    ],
+    url: "https://github.com/aexfin",
+    siteName: "aexfin 👾",
   }
 };
 
