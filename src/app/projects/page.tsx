@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 
 type Repository = {
   id: string;
@@ -37,7 +38,7 @@ export default async function Projects() {
     <main className="flex flex-col items-center justify-between p-10">
       <div className="flex flex-row flex-wrap items-center justify-center">
         {repositories.map((repository) => (
-          <a href={repository.html_url} target="_blank" className="min-w-64 min-h-32 px-6 py-4 m-1.5 justify-between text-wrap bg-neutral-950 rounded-md border-2 border-neutral-900 cursor-crosshair duration-300 hover:bg-neutral-800" key={repository.id}>
+          <Link href={`/projects/${repository.name}`} className="min-w-64 min-h-32 px-6 py-4 m-1.5 justify-between text-wrap bg-neutral-950 rounded-md border-2 border-neutral-900 cursor-crosshair duration-300 hover:bg-neutral-800" key={repository.id}>
             <div className="mb-2">
             <h2 className="text-2xl">{repository.full_name}</h2>
             <p className="text-sm text-neutral-500">{repository.description}</p>
@@ -47,7 +48,7 @@ export default async function Projects() {
                   {repository.language}
                 </span>
               )}
-          </a>
+          </Link>
         ))}
       </div>
     </main>
