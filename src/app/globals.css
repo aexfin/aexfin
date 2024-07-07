@@ -23,9 +23,9 @@ body::-webkit-scrollbar {
 }
 
 .now-playing::after {
-  content: 'Now Playing';
+  content: "Listening To";
 }
 
 .last-played::after {
-  content: 'Last Played';
+  content: "Last Played";
 }
