@@ -57,12 +57,15 @@ export default async function About() {
         </ul>
       </div>
 
-      <div className="flex flex-row items-center justify-between px-2 py-2 bg-neutral-950 border-2 border-neutral-900 rounded-md">
+      <div className="flex flex-row items-center px-2 py-2 bg-neutral-950 border-2 border-neutral-900 rounded-md">
         <img src={track.image[3]["#text"]} alt="track" className="w-20 h-auto rounded-md border-2 border-neutral-900"/>
         <div className="flex flex-col">
-          <h2 className={`${Boolean(track["@attr"]?.nowplaying) === true ? "now-playing" : "last-played"} px-2 text-xs text-neutral-600`}></h2>
-          <h2 className="px-2 py-0 text-lg tracking-wide">{track.name}</h2>
-          <h2 className="px-2 text-xs text-neutral-400">by {track.artist["#text"]}</h2>
+          <div className="flex flex-row items-center mx-2">
+            <div className={`${Boolean(track["@attr"]?.nowplaying) === true ? "bg-green-600" : "bg-red-600"} w-2 h-2 rounded-full animate-pulse`}></div>
+            <h2 className={`${Boolean(track["@attr"]?.nowplaying) === true ? "now-playing" : "last-played"} px-2 text-xs text-neutral-600`}></h2>
+          </div>
+          <h2 className="mx-2 text-lg tracking-wide">{track.name}</h2>
+          <h2 className="mx-2 text-xs text-neutral-400">by {track.artist["#text"]}</h2>
         </div>
       </div>
     </main>
