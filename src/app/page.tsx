@@ -35,14 +35,14 @@ export default async function Home() {
       </div>
 
       <div className="flex flex-col my-2">
-        <Link href="https://github.com/aexfin" target="_blank" className="px-16 py-3 m-2 text-lg bg-neutral-950 text-neutral-500 rounded-md border-2 border-neutral-900 duration-300 hover:text-neutral-50 hover:bg-neutral-800 cursor-crosshair">
+        <Link href="https://github.com/aexfin" target="_blank" className="text-center px-16 py-3 m-2 text-lg bg-neutral-950 text-neutral-500 rounded-md border-2 border-neutral-900 duration-300 hover:text-neutral-50 hover:bg-neutral-800 cursor-crosshair">
           socials/<span className="text-neutral-50">github</span>
         </Link>
-        <Link href="https://discord.com/users/1028983693269815296/" target="_blank" className="px-16 py-3 m-2 text-lg bg-neutral-950 text-neutral-500 rounded-md border-2 border-neutral-900 duration-300 hover:text-neutral-50 hover:bg-neutral-800 cursor-crosshair">
-          socials/<span className="text-neutral-50">discord</span>
+        <Link href="https://www.instagram.com/aexfin/" target="_blank" className="text-center px-16 py-3 m-2 text-lg bg-neutral-950 text-neutral-500 rounded-md border-2 border-neutral-900 duration-300 hover:text-neutral-50 hover:bg-neutral-800 cursor-crosshair">
+          socials/<span className="text-neutral-50">instagram</span>
         </Link>
-        <Link href="https://steamcommunity.com/profiles/76561199387769792" target="_blank" className="px-16 py-3 m-2 text-lg bg-neutral-950 text-neutral-500 rounded-md border-2 border-neutral-900 duration-300 hover:text-neutral-50 hover:bg-neutral-800 cursor-crosshair">
-          socials/<span className="text-neutral-50">steam</span>
+        <Link href="https://discord.com/users/1028983693269815296/" target="_blank" className="text-center px-16 py-3 m-2 text-lg bg-neutral-950 text-neutral-500 rounded-md border-2 border-neutral-900 duration-300 hover:text-neutral-50 hover:bg-neutral-800 cursor-crosshair">
+          socials/<span className="text-neutral-50">discord</span>
         </Link>
       </div>
     </main>
