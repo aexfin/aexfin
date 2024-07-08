@@ -13,6 +13,7 @@ type Repository = {
     created_at: string;
     pushed_at: string;
     stargazers_count: number;
+    watchers_count: number;
     forks_count: number;
 }
 
@@ -47,27 +48,28 @@ export default async function ProjectDetails({ params }: {
     return (
         <main className="flex flex-col items-center justify-center h-screen p-6">
             <div className="flex flex-col max-w-96 justify-between px-6 py-4 bg-neutral-950 rounded-md border-2 border-neutral-900">
-                <div className="mb-4">
+                <div className="mb-2">
                     <h2 className="mb-2 text-2xl text-wrap text-neutral-500">
                         projects/<span className="text-neutral-50">{repository.name}</span>
                     </h2>
                     <p className="mb-2 break-word text-neutral-500">{repository.description}</p>
                     <div className="flex flex-row flex-wrap">
                         {languageNames.map((language, index) => (
-                            <div key={index} className="mx-1 px-2 py-0.5 rounded-full bg-neutral-50 duration-300 hover:bg-neutral-500">
+                            <div key={index} className="mx-1 my-1 px-2 py-0.5 rounded-full bg-neutral-50 duration-300 hover:bg-neutral-500">
                                 <h2 className="text-xs font-bold text-neutral-950">{language}</h2>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <div className="my-4">
+                <div className="my-2 p-2 rounded-md border-2 border-neutral-800 bg-neutral-900">
                     <p className="text-neutral-500">⭐ Stars: <span className="text-neutral-50">{repository.stargazers_count}</span></p>
+                    <p className="text-neutral-500">👁️ Watchers: <span className="text-neutral-50">{repository.watchers_count}</span></p>
                     <p className="text-neutral-500">🖇️ Forks: <span className="text-neutral-50">{repository.forks_count}</span></p>
                     <p className="text-neutral-500">💾 Size: <span className="text-neutral-50">{repository.size}MB</span></p>
                 </div>
 
-                <div className="my-4">
+                <div className="my-2">
                     <p className="text-neutral-500">
                         Created @ <span className="text-neutral-50">
                             {new Date(repository.pushed_at).getUTCHours()}:{new Date(repository.created_at).getUTCMinutes()} <span className="text-neutral-500">on</span> {new Date(repository.created_at).toLocaleDateString()}
