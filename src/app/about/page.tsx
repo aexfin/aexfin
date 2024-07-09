@@ -29,7 +29,7 @@ type Track = {
 }
 
 export default async function About() {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   const response = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=aexfin&api_key=${process.env.API_KEY}&limit=1&format=json`,
     {
       cache: "no-store",
@@ -58,7 +58,7 @@ export default async function About() {
       </div>
 
       <div className="flex flex-row align-middle items-center px-2 py-2 bg-neutral-950 border-2 border-neutral-900 rounded-md">
-        <img src={track.image[3]["#text"]} alt="track" className="w-20 h-auto rounded-md border-2 border-neutral-900"/>
+        <img src={track.image[3]["#text"]} alt="track" className="w-20 h-auto rounded-md border-2 border-neutral-900 pointer-events-none"/>
         <div className="flex mb-1 align-middle flex-col">
           <div className="flex flex-row align-middle items-center ml-2">
             <div className={`${Boolean(track["@attr"]?.nowplaying) === true ? "bg-green-600 animate-pulse" : "bg-neutral-600"} w-1.5 h-2 mr-0.5 rounded-full`}></div>

@@ -23,7 +23,7 @@ type Repository = {
 }
 
 export default async function Projects() {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   const response = await fetch("https://api.github.com/users/aexfin/repos",
     {
       cache: "no-store",
