@@ -1,1 +1,1 @@
-<----- This is [**Guts**](https://berserk.fandom.com/wiki/Guts) from the [**Berserk**](https://berserk.fandom.com/wiki/Berserk_Wiki) manga series.
+<----- This is [**Angel Devil**](https://chainsaw-man.fandom.com/wiki/Angel_Devil) from the [**Chainsaw Man**](https://chainsaw-man.fandom.com/wiki/Chainsaw_Man_Wiki) manga/anime series.
