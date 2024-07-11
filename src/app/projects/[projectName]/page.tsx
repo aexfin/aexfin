@@ -83,7 +83,7 @@ export default async function ProjectDetails({ params }: {
                 </div>
 
                 <a href={repository.html_url} target="_blank" className="mt-4 py-2 text-center rounded-md duration-300 border-2 border-neutral-800 bg-neutral-900 hover:bg-neutral-700 cursor-crosshair">
-                    GitHub
+                    View Repository
                 </a>
             </div>
         </main>
