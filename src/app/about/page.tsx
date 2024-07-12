@@ -74,8 +74,9 @@ export default async function About() {
           <div className={`${Boolean(track["@attr"]?.nowplaying) === true ? "bg-green-600 animate-pulse" : "bg-neutral-600"} w-2 h-2 rounded-full absolute bottom-0 right-0`}></div>
         </div>
         <div className="flex mb-1 align-middle flex-col">
-          <div className="flex flex-row align-middle items-center ml-2">
-          </div>
+          {Boolean(track["@attr"]?.nowplaying) === true ? (
+            <h2 className="mx-2 text-xs tracking-wide text-neutral-600">Listening to</h2>
+          ) : null}
           <h2 className="mx-2 text-lg tracking-wider">{track.name}</h2>
           <h2 className="mx-2 text-xs tracking-wider text-neutral-600">by <span className="text-neutral-50">{track.artist["#text"]}</span></h2>
           {Boolean(track["@attr"]?.nowplaying) === false ? (
