@@ -79,7 +79,7 @@ export default async function About() {
           <h2 className="mx-2 text-lg tracking-wider">{track.name}</h2>
           <h2 className="mx-2 text-xs tracking-wider text-neutral-600">by <span className="text-neutral-50">{track.artist["#text"]}</span></h2>
           {Boolean(track["@attr"]?.nowplaying) === false ? (
-            <h2 className="mx-2 text-xs tracking-wider text-neutral-600">about <span className="text-neutral-50">{timeAgo(track.date.uts)}</span> ago</h2>
+            <h2 className="mx-2 text-xs mt-2 tracking-wider text-neutral-600">about <span className="text-neutral-50">{timeAgo(track.date.uts)}</span> ago</h2>
           ) : null}
         </div>
       </div>
