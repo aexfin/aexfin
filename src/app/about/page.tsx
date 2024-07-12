@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { formatDistanceToNow } from "date-fns"
 
 export const metadata: Metadata = {
   title: "about @aexfin",
@@ -23,6 +24,9 @@ type Track = {
     }
   ];
   name: string;
+  date: {
+    uts: number
+  }
   "@attr": {
     nowplaying: string;
   }
@@ -38,6 +42,13 @@ export default async function About() {
   );
   const data = await response.json();
   const track: Track = data.recenttracks.track[0];
+
+  function timeAgo(epoch: number): string {
+    const date = new Date(epoch * 1000);
+    let distance = formatDistanceToNow(date, {addSuffix: false, includeSeconds: true});
+    distance = distance.replace("about ", "");
+    return distance;
+  }
   return (
     <main className="flex flex-col items-center justify-between p-6">
       <img src="https://github.com/aexfin.png" alt="aexfin" className="w-60 rounded-full border-2 border-neutral-900 pointer-events-none"/>
@@ -58,14 +69,18 @@ export default async function About() {
       </div>
 
       <div className="flex flex-row align-middle items-center px-2 py-2 bg-neutral-950 border-2 border-neutral-900 rounded-md">
-        <img src={track.image[3]["#text"]} alt="track" className="w-20 h-auto rounded-md border-2 border-neutral-900 pointer-events-none"/>
+        <div className="relative">
+          <img src={track.image[3]["#text"]} alt="track" className="w-20 h-auto rounded-md border-2 border-neutral-900 pointer-events-none"/>
+          <div className={`${Boolean(track["@attr"]?.nowplaying) === true ? "bg-green-600 animate-pulse" : "bg-neutral-600"} w-2 h-2 rounded-full absolute bottom-0 right-0`}></div>
+        </div>
         <div className="flex mb-1 align-middle flex-col">
           <div className="flex flex-row align-middle items-center ml-2">
-            <div className={`${Boolean(track["@attr"]?.nowplaying) === true ? "bg-green-600 animate-pulse" : "bg-neutral-600"} w-1.5 h-2 mr-0.5 rounded-full`}></div>
-            <h2 className={`${Boolean(track["@attr"]?.nowplaying) === true ? "now-playing" : "last-played"} mx-1 text-xs text-neutral-600`}></h2>
           </div>
           <h2 className="mx-2 text-lg tracking-wider">{track.name}</h2>
           <h2 className="mx-2 text-xs tracking-wider text-neutral-600">by <span className="text-neutral-50">{track.artist["#text"]}</span></h2>
+          {Boolean(track["@attr"]?.nowplaying) === false ? (
+            <h2 className="mx-2 text-xs tracking-wider text-neutral-600">about <span className="text-neutral-50">{timeAgo(track.date.uts)}</span> ago</h2>
+          ) : null}
         </div>
       </div>
     </main>

@@ -21,11 +21,3 @@ body::-webkit-scrollbar {
     text-wrap: balance;
   }
 }
-
-.now-playing::after {
-  content: "Listening To";
-}
-
-.last-played::after {
-  content: "Last Played";
-}
