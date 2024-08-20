@@ -16,10 +16,14 @@ export default async function Home() {
 
   if (response.status === 204 || response.status > 400) {
     console.log(response.statusText);
+    return (
+      <main className="flex flex-col items-center justify-center">
+        Somehting went wrong :0, please come back later
+      </main>
+    )
   }
 
   const song = await response.json();
-  const device = song.device.name;
   const playing = song.is_playing;
   const title = song.item.name;
   const artist = song.item.artists[0].name;
@@ -31,8 +35,7 @@ export default async function Home() {
 
   return (
     <main className="w-screen min-h-screen flex flex-col lg:flex-row items-center justify-center gap-10 p-6">
-
-      <div className="flex flex-col items-center justify-center gap-1">
+      <div className="flex flex-row lg:flex-col items-center justify-center gap-1">
         <Link
           href="/"
           className="px-1 bg-neutral-950 hover:bg-violet-400 hover:text-neutral-950"
@@ -52,20 +55,17 @@ export default async function Home() {
           Music
         </Link>
       </div>
-
       <img
         src="https://github.com/aexfin.png"
         alt="aexfin"
         className="w-32 h-auto pointer-events-none"
       />
-      
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-2xl text-neutral-300">aexfin</h1>
         <p className="hover:text-violet-400">
           short guy with sh*t load of time
         </p>
       </div>
-
       <div className="flex flex-col items-center gap-1 justify-center">
         <span className="px-1 bg-neutral-950 hover:text-violet-400">
           {age} y/o
@@ -75,7 +75,6 @@ export default async function Home() {
         </span>
         <span className="px-1 bg-neutral-950 hover:text-violet-400">👾</span>
       </div>
-
       <div
         className={`w-auto h-32 flex flex-row items-center justify-center bg-neutral-950 ${
           playing ? "animate-pulse" : ""
@@ -105,7 +104,6 @@ export default async function Home() {
           </p>
         </div>
       </div>
-
       <div className="flex flex-col items-center justify-between gap-1">
         <a
           href="https://github.com/aexfin"
