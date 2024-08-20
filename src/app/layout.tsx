@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${darker_grotesque.className} text-neutral-500 no-scrollbar`}>{children}</body>
+      <body className={`${darker_grotesque.className} text-neutral-500`}>{children}</body>
     </html>
   );
 }
