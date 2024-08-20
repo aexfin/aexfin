@@ -73,7 +73,7 @@ export default async function Music(res: any) {
               <img
                 src={track.album.images[0].url}
                 alt="image"
-                className="w-32 h-auto"
+                className="w-32 h-auto pointer-events-none"
               />
               <h1 className="text-neutral-300 text-center">{track.name}</h1>
               <p>
