@@ -15,7 +15,7 @@ export default async function Home() {
   const response = await getNowPlaying();
 
   if (response.status === 204 || response.status > 400) {
-    console.log("something is wrong")
+    console.log(response.statusText);
   }
 
   const song = await response.json();

@@ -15,10 +15,7 @@ export const getAccessToken = async () => {
         method: "POST",
         headers: {
             Authorization: `Basic ${basic}`,
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Cache-Control": "no-cache, no-store, must-revalidate",
-            Pragma: "no-cache",
-            Expires: "0"
+            "Content-Type": "application/x-www-form-urlencoded"
         },
         body: querystring.stringify({
             grant_type: "refresh_token",
