@@ -66,7 +66,7 @@ export default async function Music(res: any) {
           {tracks.map((track) => (
             <a
               href={track.external_urls.spotify}
-              id={track.id}
+              key={track.id}
               className="flex flex-col items-center justify-center bg-neutral-950 hover:bg-neutral-900 p-2"
             >
               <img
