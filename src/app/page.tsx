@@ -31,7 +31,7 @@ export default async function Home() {
 
   return (
     <main className="w-screen min-h-screen flex flex-col lg:flex-row items-center justify-center gap-10 p-6">
-      {/* Navigation */}
+
       <div className="flex flex-col items-center justify-center gap-1">
         <Link
           href="/"
@@ -53,14 +53,12 @@ export default async function Home() {
         </Link>
       </div>
 
-      {/* Profile Image */}
       <img
         src="https://github.com/aexfin.png"
         alt="aexfin"
         className="w-32 h-auto pointer-events-none"
       />
-
-      {/* Profile Info */}
+      
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-2xl text-neutral-300">aexfin</h1>
         <p className="hover:text-violet-400">
@@ -68,7 +66,6 @@ export default async function Home() {
         </p>
       </div>
 
-      {/* Additional Info */}
       <div className="flex flex-col items-center gap-1 justify-center">
         <span className="px-1 bg-neutral-950 hover:text-violet-400">
           {age} y/o
@@ -79,7 +76,6 @@ export default async function Home() {
         <span className="px-1 bg-neutral-950 hover:text-violet-400">👾</span>
       </div>
 
-      {/* Now Playing */}
       <div
         className={`w-auto h-32 flex flex-row items-center justify-center bg-neutral-950 ${
           playing ? "animate-pulse" : ""
@@ -110,7 +106,6 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* Social Links */}
       <div className="flex flex-col items-center justify-between gap-1">
         <a
           href="https://github.com/aexfin"
