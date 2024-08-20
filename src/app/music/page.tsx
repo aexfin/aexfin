@@ -39,7 +39,7 @@ export default async function Music(res: any) {
   const data = await response.json();
   const tracks: Track[] = await data.items;
   return (
-    <main className="w-screen h-screen flex flex-col lg:flex-row items-center justify-center gap-10 p-6">
+    <main className="w-screen min-h-screen flex flex-col lg:flex-row items-center justify-center gap-10 p-6">
       <div className="flex flex-col items-center justify-center gap-1">
         <Link
           href="/"
@@ -62,7 +62,7 @@ export default async function Music(res: any) {
       </div>
       <div className="flex flex-col items-center justify-center">
         <h1>Top 10 Tracks this Month</h1>
-        <div className="grid grid-cols-1 lg:grid-cols-5 grid-rows-* items-center justify-center gap-2">
+        <div className="grid grid-cols-2 lg:grid-cols-5 grid-rows-* items-center justify-center gap-2">
           {tracks.map((track) => (
             <a
               href={track.external_urls.spotify}
@@ -74,10 +74,10 @@ export default async function Music(res: any) {
                 alt="image"
                 className="w-32 h-auto"
               />
-              <h1 className="text-neutral-300">{track.name}</h1>
+              <h1 className="text-neutral-300 text-center">{track.name}</h1>
               <p>
                 by{" "}
-                <span className="text-neutral-300">
+                <span className="text-neutral-300 text-center">
                   {track.artists[0].name}
                 </span>
               </p>

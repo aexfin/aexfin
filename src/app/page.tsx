@@ -30,7 +30,7 @@ export default async function Home() {
   const age = year - yob;
 
   return (
-    <main className="w-screen h-screen flex flex-col lg:flex-row items-center justify-center gap-10 p-6">
+    <main className="w-screen min-h-screen flex flex-col lg:flex-row items-center justify-center gap-10 p-6">
       {/* Navigation */}
       <div className="flex flex-col items-center justify-center gap-1">
         <Link
@@ -73,7 +73,7 @@ export default async function Home() {
         <span className="px-1 bg-neutral-950 hover:text-violet-400">
           {age} y/o
         </span>
-        <span className="px-1 bg-neutral-950 hover:text-violet-400">
+        <span className="px-1 bg-neutral-950 hover:text-violet-400 text-center">
           Mumbai, IN
         </span>
         <span className="px-1 bg-neutral-950 hover:text-violet-400">👾</span>
