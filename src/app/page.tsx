@@ -14,20 +14,27 @@ export default async function Home() {
   };
   const response = await getNowPlaying();
 
-  if (response.status === 204 || response.status > 400) {
-    console.log(response.status);
-    return (
-      <main className="flex flex-col items-center justify-center">
-        Somehting went wrong :0, please come back later
-      </main>
-    )
-  }
+  let song = null;
+  let playing = false;
+  let title = "";
+  let artist = "";
+  let albumImageUrl = "";
 
-  const song = await response.json();
-  const playing = song.is_playing;
-  const title = song.item.name;
-  const artist = song.item.artists[0].name;
-  const albumImageUrl = song.item.album.images[0].url;
+  if (response.status === 204) {
+    console.log(response.status);
+  } else if (response.status >= 200 && response.status< 300) {
+    try {
+      song = await response.json();
+      playing = song.is_playing;
+      title = song.item.name;
+      artist = song.item.artists[0].name;
+      albumImageUrl = song.item.album.images[0].url;
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+    }
+  } else {
+    console.error("Error response status:", response.status);
+  }
 
   const yob = 2005;
   const year = new Date().getFullYear();
