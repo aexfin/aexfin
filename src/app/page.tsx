@@ -15,7 +15,7 @@ export default async function Home() {
   const response = await getNowPlaying();
 
   if (response.status === 204 || response.status > 400) {
-    console.log(response.statusText);
+    console.log(response.status);
     return (
       <main className="flex flex-col items-center justify-center">
         Somehting went wrong :0, please come back later
@@ -77,32 +77,40 @@ export default async function Home() {
       </div>
       <div
         className={`w-auto h-32 flex flex-row items-center justify-center bg-neutral-950 ${
-          playing ? "animate-pulse" : ""
+          playing && response.status != 200 ? "animate-pulse" : ""
         }`}
       >
-        <img
-          src={albumImageUrl}
-          alt="track"
-          className="w-32 h-full pointer-events-none"
-        />
-        <div className="flex flex-col items-center justify-center m-4">
-          <p className="text-center">
-            {playing ? "Listening to" : "Last played"}
-          </p>
-          <h1
-            className={`text-center ${
-              playing ? "text-green-400" : "text-neutral-300"
-            }`}
-          >
-            {title}
-          </h1>
-          <p className="text-center">
-            by{" "}
-            <span className={playing ? "text-green-400" : "text-neutral-300"}>
-              {artist}
-            </span>
-          </p>
-        </div>
+        {playing ? (
+          <>
+            <img
+              src={albumImageUrl}
+              alt="track"
+              className="w-32 h-full pointer-events-none"
+            />
+            <div className="flex flex-col items-center justify-center m-4">
+              <p className="text-center">
+                {playing ? "Listening to" : "Last played"}
+              </p>
+              <h1
+                className={`text-center ${
+                  playing ? "text-green-400" : "text-neutral-300"
+                }`}
+              >
+                {title}
+              </h1>
+              <p className="text-center">
+                by{" "}
+                <span
+                  className={playing ? "text-green-400" : "text-neutral-300"}
+                >
+                  {artist}
+                </span>
+              </p>
+            </div>
+          </>
+        ) : (
+          <h1 className="m-2">not listening to anything</h1>
+        )}
       </div>
       <div className="flex flex-col items-center justify-between gap-1">
         <a
