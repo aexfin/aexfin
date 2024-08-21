@@ -7,7 +7,7 @@ const refresh_token = process.env.REFRESH_TOKEN;
 const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
 
 const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
-export const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player";
+export const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing";
 export const TOP_TRACKS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10";
 
 export const getAccessToken = async () => {

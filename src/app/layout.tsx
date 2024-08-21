@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Darker_Grotesque } from "next/font/google";
 import "./globals.css";
-
+import Navigation from "./components/navigation";
 const darker_grotesque = Darker_Grotesque({
   subsets: ["latin"],
   weight: "600"
@@ -30,7 +30,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${darker_grotesque.className} text-neutral-500 animate-fade`}>{children}</body>
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+      />
+
+      <body
+        className={`${darker_grotesque.className} w-screen min-h-screen flex flex-col items-center justify-center text-neutral-500 text-lg animate-fade`}
+      >
+        <Navigation />
+        {children}
+      </body>
     </html>
   );
 }
