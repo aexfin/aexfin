@@ -32,8 +32,6 @@ export default async function Home() {
     } catch (error) {
       console.error("Error parsing JSON:", error);
     }
-  } else {
-    console.error("Error response status:", response.status);
   }
 
   const yob = 2005;
