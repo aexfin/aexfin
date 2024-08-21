@@ -32,12 +32,20 @@ export default async function Music(res: any) {
       cache: "no-cache"
     });
   };
+  let tracks:Track[] = [];
   const response = await getTopTracks();
-  if (response.status === 204 || response.status > 400) {
-    return res.status(200).json({ isPlaying: false });
+  if (response.status === 204) {
+    console.log(response.status);
+  } else if (response.status >= 200 && response.status < 300) {
+    try {
+      const data = await response.json();
+      tracks = await data.items;
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+    }
+  } else {
+    console.error("Error response status:", response.status);
   }
-  const data = await response.json();
-  const tracks: Track[] = await data.items;
   return (
     <main className="w-screen min-h-screen flex flex-col lg:flex-row items-center justify-center gap-10 p-6">
       <div className="flex flex-row lg:flex-col items-center justify-center gap-1">
