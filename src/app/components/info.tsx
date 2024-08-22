@@ -4,7 +4,7 @@ export default async function Info() {
     const age = year - yob;
 
     return (
-      <div className="flex flex-col items-center justify-center gap-2">
+      <div className="flex flex-row items-center justify-center gap-2">
         <h1 className="px-1 bg-neutral-950 hover:text-violet-400">👾</h1>
         <h1 className="px-1 bg-neutral-950 hover:text-violet-400">he/him</h1>
         <h1 className="px-1 bg-neutral-950 hover:text-violet-400">{age} y/o</h1>
