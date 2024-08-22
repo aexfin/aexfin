@@ -58,6 +58,22 @@ type TopTrack = {
     }
 }
 
+type TopArtists = {
+    id: string;
+    external_urls: {
+        spotify: string;
+    },
+    followers: {
+        totle: number;
+    };
+    images: [
+        {
+            url: string;
+        }
+    ];
+    name: string;
+}
+
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
 const refresh_token = process.env.REFRESH_TOKEN;
@@ -68,6 +84,7 @@ const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
 export const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player";
 export const RECENTLY_PLAYED_ENDPOINT = "https://api.spotify.com/v1/me/player/recently-played?limit=1";
 export const TOP_TRACKS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10";
+export const TOP_ARTISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=10"
 
 export const getAccessToken = async () => {
     const response = await fetch(TOKEN_ENDPOINT, {
@@ -144,4 +161,20 @@ export const getTopTracks = async () => {
     const tracks: TopTrack[] = data.items;
     
     return tracks;
+};
+
+export const getTopArtists = async () => {
+    const { access_token } = await getAccessToken();
+    const response = await fetch(TOP_ARTISTS_ENDPOINT, {
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+        },
+        cache: "no-cache",
+    });
+
+    const data = await response.json();
+
+    const artists: TopArtists[] = data.items;
+    
+    return artists;
 };

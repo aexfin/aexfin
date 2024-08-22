@@ -38,7 +38,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${darker_grotesque.className} w-screen min-h-screen flex flex-col items-center justify-center text-neutral-500 text-lg animate-fade`}
+        className={`${darker_grotesque.className} w-screen min-h-screen flex flex-col items-center justify-center text-neutral-500 text-lg animate-fade overflow-x-hidden`}
       >
         <Navigation />
         {children}
