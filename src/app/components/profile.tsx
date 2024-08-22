@@ -8,7 +8,7 @@ export default async function Profile() {
         />
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-2xl text-neutral-300">aexfin</h1>
-          <p className="hover:text-violet-400">
+          <p className="text-center hover:text-violet-400">
             short guy with sh*t load of time
           </p>
         </div>

@@ -2,7 +2,7 @@ import Profile from "../components/profile";
 import CurrentlyPlaying from "../components/currently-playing";
 import Info from "../components/info";
 import Socials from "../components/socials";
-import Skills from "../components/skills";
+import Tools from "../components/tools";
 
 export default async function About() {
   return (
@@ -10,7 +10,7 @@ export default async function About() {
       <Profile />
       <Info />
       <CurrentlyPlaying />
-      <Skills />
+      <Tools />
       <Socials />
     </main>
   );

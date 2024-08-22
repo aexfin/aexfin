@@ -30,12 +30,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-      />
-
+      <head>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+        />
+      </head>
       <body
         className={`${darker_grotesque.className} w-screen min-h-screen flex flex-col items-center justify-center text-neutral-500 text-lg animate-fade`}
       >
