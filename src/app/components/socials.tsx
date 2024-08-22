@@ -1,6 +1,6 @@
 export default async function Socials() {
     return (
-      <div className="flex flex-row items-center justify-between gap-2">
+      <div className="flex flex-row lg:flex-col items-center justify-between gap-2">
         <a
           href="https://github.com/aexfin"
           target="_blank"
