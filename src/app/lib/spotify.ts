@@ -1,3 +1,4 @@
+import moment from "moment";
 import querystring from "querystring";
 
 type PlayingTrack = {
@@ -20,6 +21,7 @@ type PlayingTrack = {
 }
 
 type Track = {
+    played_at?: string;
     track: {
         id: string;
         name: string;
@@ -105,7 +107,6 @@ export const getAccessToken = async () => {
 
 export const getRecentlyPlayed = async () => {
     const { access_token } = await getAccessToken();
-    console.log();
     const response = await fetch(RECENTLY_PLAYED_ENDPOINT, {
         headers: {
             Authorization: `Bearer ${access_token}`,
@@ -115,11 +116,13 @@ export const getRecentlyPlayed = async () => {
     const data = await response.json();
 
     const tracks: Track[] = await data.items;
+    let played_at = tracks?.[0]?.played_at;
+    played_at = moment(played_at).fromNow();
     const title = tracks?.[0]?.track?.name;
     const artist = tracks?.[0]?.track?.artists?.[0]?.name;
     const albumImageUrl = tracks?.[0]?.track?.album?.images?.[0]?.url;
 
-    return { title, artist, albumImageUrl }
+    return { played_at, title, artist, albumImageUrl }
 };
 
 export const getTrack = async () => {
@@ -142,8 +145,8 @@ export const getTrack = async () => {
         return { playing, title, artist, albumImageUrl }
     } else if (response.status === 204) {
         const playing = false;
-        const { title, artist, albumImageUrl } = await getRecentlyPlayed();
-        return { playing, title, artist, albumImageUrl };
+        const { played_at, title, artist, albumImageUrl } = await getRecentlyPlayed();
+        return { played_at, playing, title, artist, albumImageUrl };
     }
     const playing = false;
     const title = "hmm";

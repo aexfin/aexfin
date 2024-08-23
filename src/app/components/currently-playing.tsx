@@ -1,7 +1,7 @@
 import { getTrack } from "../lib/spotify";
 
 export default async function CurrentlyPlaying() {
-  const { playing, title, artist, albumImageUrl } = await getTrack();
+  const { playing, played_at, title, artist, albumImageUrl } = await getTrack();
   return (
     <div
       className={`w-auto h-32 flex flex-row items-center justify-center bg-neutral-950 ${
@@ -32,6 +32,9 @@ export default async function CurrentlyPlaying() {
             {artist}
           </span>
         </p>
+        {played_at && (
+          <h1>{played_at}</h1>
+        )}
       </div>
     </div>
   );
