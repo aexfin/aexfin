@@ -10,7 +10,7 @@ export default async function CurrentlyPlaying() {
     >
       <img
         src={albumImageUrl}
-        alt="track"
+        alt={title}
         className="w-32 h-full pointer-events-none"
       />
       <div className="flex flex-col items-center justify-center m-4">

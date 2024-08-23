@@ -114,10 +114,10 @@ export const getRecentlyPlayed = async () => {
     });
     const data = await response.json();
 
-    const tracks: Track = await data.items;
-    const title = tracks?.track?.name;
-    const artist = tracks?.track?.artists?.[0]?.name;
-    const albumImageUrl = tracks?.track?.album?.images?.[0]?.url;
+    const tracks: Track[] = await data.items;
+    const title = tracks?.[0]?.track?.name;
+    const artist = tracks?.[0]?.track?.artists?.[0]?.name;
+    const albumImageUrl = tracks?.[0]?.track?.album?.images?.[0]?.url;
 
     return { title, artist, albumImageUrl }
 };
@@ -130,11 +130,7 @@ export const getTrack = async () => {
         },
         cache: "no-cache",
     });
-    if (response.status === 204) {
-        const playing = false;
-        const { title, artist, albumImageUrl } = await getRecentlyPlayed();
-        return { playing, title, artist, albumImageUrl };
-    } else {
+    if (response.status === 200) {
         const data = await response.json();
     
         const track: PlayingTrack = await data;
@@ -144,7 +140,16 @@ export const getTrack = async () => {
         const albumImageUrl = track?.item?.album?.images?.[0]?.url;
     
         return { playing, title, artist, albumImageUrl }
+    } else if (response.status === 204) {
+        const playing = false;
+        const { title, artist, albumImageUrl } = await getRecentlyPlayed();
+        return { playing, title, artist, albumImageUrl };
     }
+    const playing = false;
+    const title = "hmm";
+    const artist = "hmm2";
+    const albumImageUrl = "kk"
+    return { playing, title, artist, albumImageUrl }
 };
 
 export const getTopTracks = async () => {
