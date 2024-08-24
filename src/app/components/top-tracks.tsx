@@ -16,7 +16,7 @@ export default async function TopTracks() {
             <img
               src={track.album.images[0].url}
               alt={track.name}
-              className="size-14"
+              className="size-20 pointer-events-none"
             />
             <div className="w-full flex flex-col mx-4 items-center justify-center">
               <h1 className="text-center text-neutral-300 group-hover:text-neutral-950">

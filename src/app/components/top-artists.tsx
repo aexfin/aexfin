@@ -16,7 +16,7 @@ export default async function TopArtists() {
             <img
               src={artist.images[0].url}
               alt={artist.name}
-              className="size-32"
+              className="size-32 pointer-events-none"
             />
             <h1 className="text-center text-neutral-300 group-hover:text-neutral-950">
               {artist.name}
