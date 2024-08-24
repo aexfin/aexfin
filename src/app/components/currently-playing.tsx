@@ -4,7 +4,7 @@ export default async function CurrentlyPlaying() {
   const { playing, played_at, title, artist, albumImageUrl } = await getTrack();
   return (
     <div
-      className={`w-auto h-32 flex flex-row items-center justify-center bg-neutral-950 ${
+      className={`w-auto h-auto flex flex-row items-center justify-center bg-neutral-950 ${
         playing ? "animate-pulse" : ""
       }`}
     >
