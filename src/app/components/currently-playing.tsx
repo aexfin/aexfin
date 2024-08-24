@@ -33,7 +33,7 @@ export default async function CurrentlyPlaying() {
           </span>
         </p>
         {played_at && (
-          <h1 classname="text-md">{played_at}</h1>
+          <h1 className="text-md">{played_at}</h1>
         )}
       </div>
     </div>
