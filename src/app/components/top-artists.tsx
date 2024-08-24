@@ -4,8 +4,8 @@ export default async function TopArtists() {
   const artists = await getTopArtists();
   return (
     <div className="flex flex-col items-center justify-center w-full">
-      <h1 className="">Top Artists this Month</h1>
-      <div className="grid grid-cols-1 w-full md:grid-cols-2 lg:grid-cols-4 items-center justify-center gap-4">
+      <h1 className="hover:text-violet-400">Top Artists this Month</h1>
+      <div className="flex flex-row flex-wrap items-center justify-center gap-3">
         {artists.map((artist) => (
           <a
             key={artist.id}
