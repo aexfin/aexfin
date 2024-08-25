@@ -1,6 +1,6 @@
-import RecentlyPlayed from "../components/recently-played";
-import TopArtists from "../components/top-artists";
 import TopTracks from "../components/top-tracks";
+import TopArtists from "../components/top-artists";
+import RecentlyPlayed from "../components/recently-played";
 
 export default async function Music() {
     return (

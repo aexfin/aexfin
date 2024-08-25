@@ -1,6 +1,6 @@
 import { getTrack } from "../lib/spotify";
 
-export default async function CurrentlyPlaying() {
+export default async function SpotifyStatus() {
   const { playing, played_at, title, artist, albumImageUrl } = await getTrack();
   return (
     <div
