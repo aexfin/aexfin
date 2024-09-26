@@ -18,7 +18,7 @@ export default async function Home() {
         <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1 py-4 md:py-0 lg:py-0">
           <div className="flex flex-col m-1 items-center justify-center">
             <h1 className="text-2xl">aexfin</h1>
-            <p className="text-sm text-neutral-600">yet another programmer</p>
+            <p className="text-sm text-neutral-600">एक सामान्य व्यक्ति</p>
           </div>
           <ul className="flex flex-row m-1 gap-2 items-center justify-center">
             <span className="text-xs px-1 py-0.5 bg-black grayscale brightness-200 rounded-sm">
