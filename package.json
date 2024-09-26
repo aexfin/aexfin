@@ -1,6 +1,6 @@
 {
   "name": "aexfin",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
     "moment": "^2.30.1",
     "next": "14.2.5",
     "querystring": "^0.2.1",

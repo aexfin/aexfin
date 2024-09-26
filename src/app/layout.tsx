@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Darker_Grotesque } from "next/font/google";
+import { Chakra_Petch } from "next/font/google";
 import "./globals.css";
-import Navigation from "./components/navigation";
-const darker_grotesque = Darker_Grotesque({
+
+const darker_grotesque = Chakra_Petch({
+  weight: "500",
+  display: "auto",
+  style: ["normal"],
   subsets: ["latin"],
-  weight: "600"
 });
 
 export const metadata: Metadata = {
@@ -38,7 +40,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${darker_grotesque.className} bg-black text-zinc-600 text-center`}
+        className={`${darker_grotesque.className} text-center selection:bg-slate-400`}
       >
         {children}
       </body>

@@ -1,116 +1,15 @@
-import moment from "moment";
 import querystring from "querystring";
 
-type PlayingTrack = {
-    is_playing: boolean;
-    item: {
-        name: string;
-        artists: [
-            {
-                name: string,
-            }
-        ];
-        album: {
-            images: [
-                {
-                    url: string;
-                }
-            ];
-        }
-    }
-}
-
-type Track = {
-    played_at?: string;
-    track: {
-        id: string;
-        name: string;
-        artists: [
-            {
-                name: string,
-            }
-        ];
-        album: {
-            images: [
-                {
-                    url: string;
-                }
-            ];
-        }
-    }
-}
-
-type TopTrack = {
-    id: string;
-    external_urls: {
-        spotify: string;
-    }
-    name: string;
-    artists: [
-        {
-            name: string,
-        }
-    ];
-    album: {
-        images: [
-            {
-                url: string;
-            }
-        ];
-    }
-}
-
-type RecentTrack = {
-    played_at: string;
-    track: {
-        id: string;
-        external_urls: {
-            spotify: string;
-        }
-        name: string;
-        artists: [
-            {
-                name: string,
-            }
-        ];
-        album: {
-            images: [
-                {
-                    url: string;
-                }
-            ];
-        }
-    }
-} 
-
-type TopArtists = {
-    id: string;
-    external_urls: {
-        spotify: string;
-    },
-    followers: {
-        totle: number;
-    };
-    images: [
-        {
-            url: string;
-        }
-    ];
-    name: string;
-}
-
-const client_id = process.env.CLIENT_ID;
-const client_secret = process.env.CLIENT_SECRET;
-const refresh_token = process.env.REFRESH_TOKEN;
+const client_id = process.env.SPOTIFY_CLIENT_ID;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
 
 const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
 
 const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
 export const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player";
 export const LAST_PLAYED_ENDPOINT = "https://api.spotify.com/v1/me/player/recently-played?limit=1";
-export const TOP_TRACKS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=5";
-export const TOP_ARTISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=5"
-export const RECENTLY_PLAYED_ENDPOINT = "https://api.spotify.com/v1/me/player/recently-played?limit=5";
+
 
 export const getAccessToken = async () => {
     const response = await fetch(TOKEN_ENDPOINT, {
@@ -129,6 +28,38 @@ export const getAccessToken = async () => {
     return response.json();
 }
 
+
+export const getTrack = async () => {
+    let playing: Boolean = false;
+    let title: String;
+    let artist: String;
+    let albumImageUrl: String;
+    
+    const { access_token } = await getAccessToken();
+    
+    const response = await fetch(NOW_PLAYING_ENDPOINT, {
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+        },
+        cache: "no-cache",
+    });
+    
+    if (response.status === 200) {
+        const track = await response.json();
+
+        playing = track?.is_playing;
+        title = track?.item?.name
+        artist = track?.item?.artists?.[0]?.name;
+        albumImageUrl = track?.item?.album?.images?.[0]?.url;
+        
+        return { playing, title, artist, albumImageUrl }
+    } else {
+        const { title, artist, albumImageUrl } = await getLastPlayed();
+        return { playing, title, artist, albumImageUrl}
+    }
+};
+
+
 export const getLastPlayed = async () => {
     const { access_token } = await getAccessToken();
     const response = await fetch(LAST_PLAYED_ENDPOINT, {
@@ -139,90 +70,10 @@ export const getLastPlayed = async () => {
     });
     const data = await response.json();
 
-    const tracks: Track[] = await data.items;
-    let played_at = tracks?.[0]?.played_at;
-    played_at = moment(played_at).fromNow();
+    const tracks = await data.items;
     const title = tracks?.[0]?.track?.name;
     const artist = tracks?.[0]?.track?.artists?.[0]?.name;
     const albumImageUrl = tracks?.[0]?.track?.album?.images?.[0]?.url;
 
-    return { played_at, title, artist, albumImageUrl }
-};
-
-export const getTrack = async () => {
-    const { access_token } = await getAccessToken();
-    const response = await fetch(NOW_PLAYING_ENDPOINT, {
-        headers: {
-            Authorization: `Bearer ${access_token}`,
-        },
-        cache: "no-cache",
-    });
-    if (response.status === 200) {
-        const data = await response.json();
-    
-        const track: PlayingTrack = await data;
-        const playing = track?.is_playing;
-        const title = track?.item?.name
-        const artist = track?.item?.artists?.[0]?.name;
-        const albumImageUrl = track?.item?.album?.images?.[0]?.url;
-    
-        return { playing, title, artist, albumImageUrl }
-    } else if (response.status === 204) {
-        const playing = false;
-        const { played_at, title, artist, albumImageUrl } = await getLastPlayed();
-        return { played_at, playing, title, artist, albumImageUrl };
-    }
-    const playing = false;
-    const title = "hmm";
-    const artist = "hmm2";
-    const albumImageUrl = "kk"
-    return { playing, title, artist, albumImageUrl }
-};
-
-export const getTopTracks = async () => {
-    const { access_token } = await getAccessToken();
-    const response = await fetch(TOP_TRACKS_ENDPOINT, {
-        headers: {
-            Authorization: `Bearer ${access_token}`,
-        },
-        cache: "no-cache",
-    });
-
-    const data = await response.json();
-
-    const tracks: TopTrack[] = data.items;
-    
-    return tracks;
-};
-
-export const getTopArtists = async () => {
-    const { access_token } = await getAccessToken();
-    const response = await fetch(TOP_ARTISTS_ENDPOINT, {
-        headers: {
-            Authorization: `Bearer ${access_token}`,
-        },
-        cache: "no-cache",
-    });
-
-    const data = await response.json();
-
-    const artists: TopArtists[] = data.items;
-    
-    return artists;
-};
-
-export const getRecentlyPlayed = async () => {
-    const { access_token } = await getAccessToken();
-    const response = await fetch(RECENTLY_PLAYED_ENDPOINT, {
-        headers: {
-            Authorization: `Bearer ${access_token}`,
-        },
-        cache: "no-cache",
-    });
-
-    const data = await response.json();
-
-    const tracks: RecentTrack[] = data.items;
-    
-    return tracks;
+    return { title, artist, albumImageUrl }
 };

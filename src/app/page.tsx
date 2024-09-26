@@ -1,69 +1,84 @@
-import Link from "next/link";
+import { FaGithub, FaInstagram, FaDiscord } from "react-icons/fa6";
 import { getTrack } from "../app/lib/spotify";
 
 export default async function Home() {
   const age = new Date().getFullYear() - 2005;
-  const { playing, played_at, title, artist, albumImageUrl } = await getTrack();
+  const { playing, title, artist, albumImageUrl } = await getTrack();
   return (
     <main className="w-screen min-h-screen flex flex-col items-center justify-center">
-      <div className="w-full h-auto grid grid-cols-1 grid-rows-* md:grid-cols-2 lg:grid-cols-6 gap-2 items-center justify-center p-2">
-        <div className="w-full h-full col-span-1 row-span-1 p-2 bg-zinc-950">
+      <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 grid-rows-* gap-4 items-center justify-center p-4">
+        <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 row-span-1">
           <img
             src="https://github.com/aexfin.png"
+            className="w-full h-full pointer-events-none object-contain scale-105"
             alt="aexfin"
-            className="pointer-events-none"
+            loading="lazy"
           />
         </div>
-        <div className="w-full h-full flex flex-col col-span-1 md:col-span-1 lg:col-span-2 row-span-1 items-center justify-center p-2 bg-zinc-950">
-          <h1 className="text-2xl text-zinc-300">aexfin</h1>
-          <p>random guy with shit load of time</p>
-          <div className="flex flex-row flex-wrap gap-1">
-            <span className="px-1 bg-zinc-900">👾</span>
-            <span className="px-1 bg-zinc-900">he/him</span>
-            <span className="px-1 bg-zinc-900">{age} y/o</span>
-            <span className="px-1 bg-zinc-900">Mumbai, MH, IN</span>
+        <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1 py-4 md:py-0 lg:py-0">
+          <div className="flex flex-col m-1 items-center justify-center">
+            <h1 className="text-2xl">aexfin</h1>
+            <p className="text-sm text-neutral-600">yet another programmer</p>
           </div>
+          <ul className="flex flex-row m-1 gap-2 items-center justify-center">
+            <span className="text-xs px-1 py-0.5 bg-black grayscale brightness-200 rounded-sm">
+              👾
+            </span>
+            <span className="text-xs px-1 py-0.5 bg-black text-slate-300 rounded-sm">
+              he/him
+            </span>
+            <span className="text-xs px-1 py-0.5 bg-black text-slate-300 rounded-sm">
+              {age} y/o
+            </span>
+            <span className="text-xs px-1 py-0.5 bg-black text-slate-300 rounded-sm">
+              Mumbai, MH, IN
+            </span>
+          </ul>
         </div>
-        <div className="w-full h-full flex flex-col items-center justify-center gap-2">
-          <Link
-            href={"https://github.com/aexfin"}
+        <div className="w-full h-full flex flex-col overflow-hidden items-center justify-center gap-4 col-span-1 row-span-1">
+          <a
+            href="https://github.com/aexfin"
             target="_blank"
-            className="w-full h-1/3 flex flex-col items-center justify-center text-xl bg-zinc-950 hover:bg-zinc-900"
+            className="w-full h-full flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md shadow-[0px_4px_0_0_#000] hover:bg-slate-400 active:shadow-[0px_2px_0_0_#000] active:translate-y-[2px]"
           >
+            <FaGithub />
             GitHub
-          </Link>
-          <Link
-            href={"https://instagram.com/aexfin"}
+          </a>
+          <a
+            href="https://instagram.com/aexfin"
             target="_blank"
-            className="w-full h-1/3 flex flex-col items-center justify-center text-xl bg-zinc-950 hover:bg-zinc-900"
+            className="w-full h-full flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md shadow-[0px_0px_0_0_#000] hover:bg-slate-400 active:shadow-[0px_0px_0_0_#000] active:translate-y-[0px] active:scale-95 "
           >
+            <FaInstagram />
             Instagram
-          </Link>
-          <Link
+          </a>
+          <a
+            href="https://discord.com/users/1028983693269815296"
             target="_blank"
-            href={"https://discord.com/users/1028983693269815296"}
-            className="w-full h-1/3 flex flex-col items-center justify-center text-xl bg-zinc-950 hover:bg-zinc-900"
+            className="w-full h-full flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md shadow-[0px_-4px_0_0_#000] hover:bg-slate-400 active:shadow-[0px_-2px_0_0_#000] active:translate-y-[-2px]"
           >
+            <FaDiscord />
             Discord
-          </Link>
+          </a>
         </div>
-        <div className="w-full h-full flex flex-row col-span-1 md:col-span-1 lg:col-span-2 row-span-1 items-center justify-center p-2 bg-zinc-950">
-          <img
-            src={albumImageUrl}
-            alt={title}
-            className={`size-32 lg:size-56 pointer-events-none ${
-              playing ? "animate-pulse" : ""
-            }`}
-          />
-          <div
-            className={`w-full flex flex-col items-center align-middle justify-center ${
-              playing ? "animate-pulse" : ""
-            }`}
-          >
-            <p>{playing ? "Listening to" : "Last played"}</p>
-            <h1 className="text-xl text-zinc-300">{title}</h1>
-            <p>
-              by {""} <span className="text-zinc-300">{artist}</span>
+        <div className="w-full h-full flex flex-row border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
+          <div className="w-full h-full flex flex-col overflow-hidden items-center justify-center">
+            <img
+              src={albumImageUrl}
+              className={`pointer-events-none object-contain border-r-2 border-black ${
+                playing ? "" : "grayscale"
+              }`}
+              alt={title}
+              loading="lazy"
+            />
+          </div>
+          <div className="w-full h-full flex flex-col overflow-hidden items-center justify-center">
+            <p className="text-xs text-neutral-600">
+              {playing ? "Listening to" : "Last played"}
+            </p>
+            <h1>{title}</h1>
+            <p className="text-xs text-neutral-600">
+              by {""} <span className="text-black">{artist}</span>
             </p>
           </div>
         </div>
