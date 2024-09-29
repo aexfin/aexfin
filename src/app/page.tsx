@@ -10,7 +10,7 @@ export default async function Home() {
         <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 row-span-1">
           <img
             src="https://github.com/aexfin.png"
-            className="w-full h-full pointer-events-none object-contain scale-105"
+            className="w-full h-full pointer-events-none object-cover scale-105"
             alt="aexfin"
             loading="lazy"
           />
