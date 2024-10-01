@@ -2,37 +2,37 @@ import { createClient } from "@supabase/supabase-js";
 
 type Stats = {
   last_run: {
-    distance: Number,
+    distance: number,
     time: {
-      hours: Number,
-      minutes: Number,
-      seconds: Number
+      hours: number,
+      minutes: number,
+      seconds: number
     }
   },
   last_ride: {
-    distance: Number,
+    distance: number,
     time: {
-      hours: Number,
-      minutes: Number,
-      seconds: Number
+      hours: number,
+      minutes: number,
+      seconds: number
     }
   },
   total_run: {
-    count: Number,
-    distance: Number,
+    count: number,
+    distance: number,
     time: {
-      hours: Number,
-      minutes: Number,
-      seconds: Number
+      hours: number,
+      minutes: number,
+      seconds: number
     }
   },
   total_ride: {
-    count: Number,
-    distance: Number,
+    count: number,
+    distance: number,
     time: {
-      hours: Number,
-      minutes: Number,
-      seconds: Number
+      hours: number,
+      minutes: number,
+      seconds: number
     }
   }
 }
