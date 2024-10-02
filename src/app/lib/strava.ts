@@ -1,23 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 type Stats = {
-  last_run: {
-    distance: number,
-    time: {
-      hours: number,
-      minutes: number,
-      seconds: number
-    }
-  },
-  last_ride: {
-    distance: number,
-    time: {
-      hours: number,
-      minutes: number,
-      seconds: number
-    }
-  },
-  total_run: {
+  recent_runs: {
     count: number,
     distance: number,
     time: {
@@ -26,7 +10,43 @@ type Stats = {
       seconds: number
     }
   },
-  total_ride: {
+  recent_rides: {
+    count: number,
+    distance: number,
+    time: {
+      hours: number,
+      minutes: number,
+      seconds: number
+    }
+  },
+  recent_swims: {
+    count: number,
+    distance: number,
+    time: {
+      hours: number,
+      minutes: number,
+      seconds: number
+    }
+  },
+  total_runs: {
+    count: number,
+    distance: number,
+    time: {
+      hours: number,
+      minutes: number,
+      seconds: number
+    }
+  },
+  total_rides: {
+    count: number,
+    distance: number,
+    time: {
+      hours: number,
+      minutes: number,
+      seconds: number
+    }
+  },
+  total_swims: {
     count: number,
     distance: number,
     time: {

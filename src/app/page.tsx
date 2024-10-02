@@ -67,10 +67,10 @@ export default async function Home() {
           </a>
         </div>
         <div className="w-full h-full flex flex-row border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
-          <div className="w-full h-full flex flex-col overflow-hidden items-center justify-center">
+          <div className="w-full h-full flex flex-col overflow-hidden border-r-2 border-black items-center justify-center">
             <img
               src={albumImageUrl}
-              className={`pointer-events-none object-contain border-r-2 border-black ${
+              className={`pointer-events-none object-cover scale-100 ${
                 playing ? "" : "grayscale"
               }`}
               alt={title}
@@ -92,57 +92,89 @@ export default async function Home() {
             <TbBrandStrava />
             <h1>Strava Statistics</h1>
           </div>
-          <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-4 p-2">
+          <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 p-2">
             <div className="w-full h-full flex flex-col items-center justify-center">
-              <div className="flex flex-row items-center gap-2 mb-2">
-                <h3>Last Run</h3>
-              </div>
+              <h3>Recent Runs</h3>
               <p className="text-sm text-neutral-600">
-                Distance: {stats?.last_run?.distance} km
+                Count: {stats?.recent_runs?.count}
               </p>
               <p className="text-sm text-neutral-600">
-                Time: {stats?.last_run?.time?.hours}:
-                {stats?.last_run?.time?.minutes}:
-                {stats?.last_run?.time?.seconds}
+                Distance: {stats?.recent_runs?.distance} kms
+              </p>
+              <p className="text-sm text-neutral-600">
+                Time: {stats?.recent_runs?.time?.hours}:
+                {stats?.recent_runs?.time?.minutes}:
+                {stats?.recent_runs?.time?.seconds}
               </p>
             </div>
             <div className="w-full h-full flex flex-col items-center justify-center">
-              <div className="flex flex-row items-center gap-2 mb-2">
-                <h3>Total Run</h3>
-              </div>
+              <h3>Recent Bikings</h3>
               <p className="text-sm text-neutral-600">
-                Distance: {stats?.total_run?.distance} km
+                Count: {stats?.recent_rides?.count}
               </p>
               <p className="text-sm text-neutral-600">
-                Time: {stats?.total_run?.time?.hours}:
-                {stats?.total_run?.time?.minutes}:
-                {stats?.total_run?.time?.seconds}
-              </p>
-            </div>
-            <div className="w-full h-full flex flex-col items-center justify-center">
-              <div className="flex flex-row items-center gap-2 mb-2">
-                <h3>Last Biking</h3>
-              </div>
-              <p className="text-sm text-neutral-600">
-                Distance: {stats?.last_ride?.distance} km
+                Distance: {stats?.recent_rides?.distance} kms
               </p>
               <p className="text-sm text-neutral-600">
-                Time: {stats?.last_ride?.time?.hours}:
-                {stats?.last_ride?.time?.minutes}:
-                {stats?.last_ride?.time?.seconds}
+                Time: {stats?.recent_rides?.time?.hours}:
+                {stats?.recent_rides?.time?.minutes}:
+                {stats?.recent_rides?.time?.seconds}
               </p>
             </div>
             <div className="w-full h-full flex flex-col items-center justify-center">
-              <div className="flex flex-row items-center gap-2 mb-2">
-                <h3>Total Biking</h3>
-              </div>
+              <h3>Recent Swims</h3>
               <p className="text-sm text-neutral-600">
-                Distance: {stats?.total_ride?.distance} km
+                Count: {stats?.recent_swims?.count}
               </p>
               <p className="text-sm text-neutral-600">
-                Time: {stats?.total_ride?.time?.hours}:
-                {stats?.total_ride?.time?.minutes}:
-                {stats?.total_ride?.time?.seconds}
+                Distance: {stats?.recent_swims?.distance} kms
+              </p>
+              <p className="text-sm text-neutral-600">
+                Time: {stats?.recent_swims?.time?.hours}:
+                {stats?.recent_swims?.time?.minutes}:
+                {stats?.recent_swims?.time?.seconds}
+              </p>
+            </div>
+            <div className="w-full h-full flex flex-col items-center justify-center">
+              <h3>Total Runs</h3>
+              <p className="text-sm text-neutral-600">
+                Count: {stats?.total_runs?.count}
+              </p>
+              <p className="text-sm text-neutral-600">
+                Distance: {stats?.total_runs?.distance} kms
+              </p>
+              <p className="text-sm text-neutral-600">
+                Time: {stats?.total_runs?.time?.hours}:
+                {stats?.total_runs?.time?.minutes}:
+                {stats?.total_runs?.time?.seconds}
+              </p>
+            </div>
+            <div className="w-full h-full flex flex-col items-center justify-center">
+              <h3>Total Bikings</h3>
+              <p className="text-sm text-neutral-600">
+                Count: {stats?.total_rides?.count}
+              </p>
+              <p className="text-sm text-neutral-600">
+                Distance: {stats?.total_rides?.distance} kms
+              </p>
+              <p className="text-sm text-neutral-600">
+                Time: {stats?.total_rides?.time?.hours}:
+                {stats?.total_rides?.time?.minutes}:
+                {stats?.total_rides?.time?.seconds}
+              </p>
+            </div>
+            <div className="w-full h-full flex flex-col items-center justify-center">
+              <h3>Total Swims</h3>
+              <p className="text-sm text-neutral-600">
+                Count: {stats?.total_swims?.count}
+              </p>
+              <p className="text-sm text-neutral-600">
+                Distance: {stats?.total_swims?.distance} kms
+              </p>
+              <p className="text-sm text-neutral-600">
+                Time: {stats?.total_swims?.time?.hours}:
+                {stats?.total_swims?.time?.minutes}:
+                {stats?.total_swims?.time?.seconds}
               </p>
             </div>
           </div>
@@ -191,7 +223,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
+        <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 md:col-span-2 row-span-1">
           <div className="w-full h-auto flex flex-row border-b-2 border-black items-center justify-center py-2 gap-2">
             <TbCodeAsterisk />
             <h1>Languages Statistics</h1>
