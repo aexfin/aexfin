@@ -44,7 +44,7 @@ export default async function Home() {
           <a
             href="https://github.com/aexfin"
             target="_blank"
-            className="w-full h-full flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md shadow-[0px_4px_0_0_#000] hover:bg-slate-400 active:shadow-[0px_2px_0_0_#000] active:translate-y-[2px]"
+            className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md shadow-[0px_4px_0_0_#000] hover:bg-slate-400 active:shadow-[0px_2px_0_0_#000] active:translate-y-[2px]"
           >
             <FaGithub />
             GitHub
@@ -52,7 +52,7 @@ export default async function Home() {
           <a
             href="https://instagram.com/aexfin"
             target="_blank"
-            className="w-full h-full flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md shadow-[0px_0px_0_0_#000] hover:bg-slate-400 active:shadow-[0px_0px_0_0_#000] active:translate-y-[0px] active:scale-95 "
+            className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md shadow-[0px_0px_0_0_#000] hover:bg-slate-400 active:shadow-[0px_0px_0_0_#000] active:translate-y-[0px] active:scale-95 "
           >
             <FaInstagram />
             Instagram
@@ -60,7 +60,7 @@ export default async function Home() {
           <a
             href="https://discord.com/users/1028983693269815296"
             target="_blank"
-            className="w-full h-full flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md shadow-[0px_-4px_0_0_#000] hover:bg-slate-400 active:shadow-[0px_-2px_0_0_#000] active:translate-y-[-2px]"
+            className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md shadow-[0px_-4px_0_0_#000] hover:bg-slate-400 active:shadow-[0px_-2px_0_0_#000] active:translate-y-[-2px]"
           >
             <FaDiscord />
             Discord
@@ -238,7 +238,7 @@ export default async function Home() {
                   {language.name} ({language.text})
                 </h3>
                 <div
-                  className={`w-full min-h-8 flex flex-col border-y-2 ${
+                  className={`w-full h-full min-h-8 flex flex-col border-y-2 ${
                     index === wakatime.languages.length - 1 ? "border-b-0" : ""
                   } border-black overflow-hidden items-start justify-center`}
                 >
