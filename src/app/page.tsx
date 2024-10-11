@@ -1,4 +1,4 @@
-import { FaGithub, FaInstagram, FaDiscord } from "react-icons/fa6";
+import { FaGithub, FaInstagram, FaDiscord, FaDribbble } from "react-icons/fa6";
 import { TbBrandStrava, TbCodeCircle, TbCodeAsterisk } from "react-icons/tb";
 import { getTrack } from "../app/lib/spotify";
 import { fetchFromSupabase } from "./lib/strava";
@@ -12,7 +12,10 @@ export default async function Home() {
   return (
     <main className="w-screen min-h-screen flex flex-col items-center justify-center">
       <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 grid-rows-2 gap-4 items-center justify-center p-4">
-        <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 row-span-1">
+        <div
+          title="not me"
+          className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 row-span-1"
+        >
           <img
             src="https://github.com/aexfin.png"
             className="w-full h-full pointer-events-none object-cover scale-105"
@@ -22,11 +25,11 @@ export default async function Home() {
         </div>
         <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1 py-4 md:py-0 lg:py-0">
           <div className="flex flex-col m-1 items-center justify-center">
-            <h1 className="text-2xl">aexfin</h1>
+            <h1 title="not my real name" className="text-2xl">aexfin</h1>
             <p className="text-sm text-neutral-600">एक सामान्य व्यक्ति</p>
           </div>
           <ul className="flex flex-row m-1 gap-2 items-center justify-center">
-            <span className="text-xs px-1 py-0.5 bg-black grayscale brightness-200 rounded-sm">
+            <span title="some random emoji" className="text-xs px-1 py-0.5 bg-black grayscale brightness-200 rounded-sm">
               👾
             </span>
             <span className="text-xs px-1 py-0.5 bg-black text-slate-300 rounded-sm">
@@ -40,34 +43,45 @@ export default async function Home() {
             </span>
           </ul>
         </div>
-        <div className="w-full h-full flex flex-col overflow-hidden items-center justify-center gap-4 col-span-1 row-span-1">
+        <div className="w-full h-full grid grid-cols-2 grid-rows-2 overflow-hidden items-center justify-center gap-4 col-span-1 row-span-1">
           <a
             href="https://github.com/aexfin"
             target="_blank"
-            className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md shadow-[0px_4px_0_0_#000] hover:bg-slate-400 active:shadow-[0px_2px_0_0_#000] active:translate-y-[2px]"
+            title="GitHub"
+            className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md hover:bg-slate-400 active:scale-95"
           >
-            <FaGithub />
-            GitHub
+            <FaGithub className="text-3xl" />
           </a>
           <a
             href="https://instagram.com/aexfin"
             target="_blank"
-            className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md shadow-[0px_0px_0_0_#000] hover:bg-slate-400 active:shadow-[0px_0px_0_0_#000] active:translate-y-[0px] active:scale-95 "
+            title="Instagram"
+            className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md hover:bg-slate-400"
           >
-            <FaInstagram />
-            Instagram
+            <FaInstagram className="text-3xl" />
           </a>
           <a
             href="https://discord.com/users/1028983693269815296"
             target="_blank"
-            className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md shadow-[0px_-4px_0_0_#000] hover:bg-slate-400 active:shadow-[0px_-2px_0_0_#000] active:translate-y-[-2px]"
+            title="Discord"
+            className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md hover:bg-slate-400 active:scale-95"
           >
-            <FaDiscord />
-            Discord
+            <FaDiscord className="text-3xl" />
+          </a>
+          <a
+            href="https://dribbble.com/aexfin"
+            target="_blank"
+            title="Dribbble"
+            className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md hover:bg-slate-400 active:scale-95"
+          >
+            <FaDribbble className="text-3xl" />
           </a>
         </div>
         <div className="w-full h-full flex flex-row border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
-          <div className="w-full h-full flex flex-col overflow-hidden border-r-2 border-black items-center justify-center">
+          <div
+            title={title}
+            className="w-full h-full flex flex-col overflow-hidden border-r-2 border-black items-center justify-center"
+          >
             <img
               src={albumImageUrl}
               className={`pointer-events-none object-cover scale-100 ${
@@ -93,7 +107,10 @@ export default async function Home() {
             <h1>Strava Statistics</h1>
           </div>
           <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 p-2">
-            <div className="w-full h-full flex flex-col items-center justify-center">
+            <div
+              title="Last 4 weeks"
+              className="w-full h-full flex flex-col items-center justify-center"
+            >
               <h3>Recent Runs</h3>
               <p className="text-sm text-neutral-600">
                 Count: {stats?.recent_runs?.count}
@@ -107,7 +124,10 @@ export default async function Home() {
                 {stats?.recent_runs?.time?.seconds}
               </p>
             </div>
-            <div className="w-full h-full flex flex-col items-center justify-center">
+            <div
+              title="Last 4 weeks"
+              className="w-full h-full flex flex-col items-center justify-center"
+            >
               <h3>Recent Bikings</h3>
               <p className="text-sm text-neutral-600">
                 Count: {stats?.recent_rides?.count}
@@ -121,7 +141,10 @@ export default async function Home() {
                 {stats?.recent_rides?.time?.seconds}
               </p>
             </div>
-            <div className="w-full h-full flex flex-col items-center justify-center">
+            <div
+              title="Last 4 weeks"
+              className="w-full h-full flex flex-col items-center justify-center"
+            >
               <h3>Recent Swims</h3>
               <p className="text-sm text-neutral-600">
                 Count: {stats?.recent_swims?.count}
@@ -135,7 +158,10 @@ export default async function Home() {
                 {stats?.recent_swims?.time?.seconds}
               </p>
             </div>
-            <div className="w-full h-full flex flex-col items-center justify-center">
+            <div
+              title="All time"
+              className="w-full h-full flex flex-col items-center justify-center"
+            >
               <h3>Total Runs</h3>
               <p className="text-sm text-neutral-600">
                 Count: {stats?.total_runs?.count}
@@ -149,7 +175,10 @@ export default async function Home() {
                 {stats?.total_runs?.time?.seconds}
               </p>
             </div>
-            <div className="w-full h-full flex flex-col items-center justify-center">
+            <div
+              title="All time"
+              className="w-full h-full flex flex-col items-center justify-center"
+            >
               <h3>Total Bikings</h3>
               <p className="text-sm text-neutral-600">
                 Count: {stats?.total_rides?.count}
@@ -163,7 +192,10 @@ export default async function Home() {
                 {stats?.total_rides?.time?.seconds}
               </p>
             </div>
-            <div className="w-full h-full flex flex-col items-center justify-center">
+            <div
+              title="All time"
+              className="w-full h-full flex flex-col items-center justify-center"
+            >
               <h3>Total Swims</h3>
               <p className="text-sm text-neutral-600">
                 Count: {stats?.total_swims?.count}
