@@ -258,7 +258,7 @@ export default async function Home() {
         <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 md:col-span-2 row-span-1">
           <div className="w-full h-auto flex flex-row border-b-2 border-black items-center justify-center py-2 gap-2">
             <TbCodeAsterisk />
-            <h1>Languages Statistics</h1>
+            <h1>Language Statistics</h1>
           </div>
           <div className="w-full h-full flex flex-col gap-4">
             {wakatime.languages.map((language: any, index: number) => (
