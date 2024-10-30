@@ -5,6 +5,8 @@ import { fetchFromSupabase } from "./lib/strava";
 import { fetchWakaTime } from "./lib/wakatime";
 
 export default async function Home() {
+  const descriptions = ["एक सामान्य व्यक्ति", "some description here", "this text changes on reload"];
+  const selected = descriptions[Math.floor(Math.random() * descriptions.length)];
   const age = new Date().getFullYear() - 2005;
   const { playing, title, artist, albumImageUrl } = await getTrack();
   const stats = await fetchFromSupabase();
@@ -26,7 +28,7 @@ export default async function Home() {
         <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1 py-4 md:py-0 lg:py-0">
           <div className="flex flex-col m-1 items-center justify-center">
             <h1 title="not my real name" className="text-2xl">aexfin</h1>
-            <p className="text-sm text-neutral-600">एक सामान्य व्यक्ति</p>
+            <p className="text-sm text-neutral-600">{selected}</p>
           </div>
           <ul className="flex flex-row m-1 gap-2 items-center justify-center">
             <span title="some random emoji" className="text-xs px-1 py-0.5 bg-black grayscale brightness-200 rounded-sm">
