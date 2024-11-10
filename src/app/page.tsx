@@ -5,7 +5,7 @@ import { fetchFromSupabase } from "./lib/strava";
 import { fetchWakaTime } from "./lib/wakatime";
 
 export default async function Home() {
-  const descriptions = ["एक सामान्य व्यक्ति", "some description here", "part time graphic designer :(", "tries to be cool*"];
+  const descriptions = ["एक सामान्य व्यक्ति", "some description here", "swooooosh", "//"];
   const selected = descriptions[Math.floor(Math.random() * descriptions.length)];
   const age = new Date().getFullYear() - 2005;
   const { playing, title, artist, albumImageUrl } = await getTrack();
