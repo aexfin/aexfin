@@ -44,7 +44,7 @@ export const getTrack = async () => {
         cache: "no-cache",
     });
     
-    if (response.status === 200) {
+    if (response.status != 200) { // == | !=
         const track = await response.json();
 
         playing = track?.is_playing;
