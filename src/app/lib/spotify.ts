@@ -1,4 +1,3 @@
-import { content } from "html2canvas/dist/types/css/property-descriptors/content";
 import querystring from "querystring";
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
