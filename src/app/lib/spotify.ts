@@ -90,14 +90,14 @@ export const postWebhook = async (
     albumImageUrl: String
 ) => {
     const json = {
-        username: "aexfin-spotify-logs",
+        username: "aexfin-web-spotify-logs",
         avatar_url: "https://github.com/aexfin.png",
         content: `Someone just loaded the website 👀\n${playing ? "**Here's what you were listening to at the time:**" : "**Here's what they saw you last listened to:*"}`,
         embeds: [
             {
 
                 title: playing ? "Now Playing" : "Last Played",
-                description: `**Track:** ${title}\n**Artist:** ${artist}\n**Timestamp:** ${new Date().toLocaleTimeString()}, ${new Date().toDateString()}`,
+                description: `**Track:** ${title}\n**Artist:** ${artist}\n**Your Timestamp:** ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}\n**Their Timestamp:** ${new Date().toLocaleString()}`,
                 color: 3553599,
                 image: {
                     url: albumImageUrl,
