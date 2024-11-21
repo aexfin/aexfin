@@ -1,8 +1,10 @@
+import { content } from "html2canvas/dist/types/css/property-descriptors/content";
 import querystring from "querystring";
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
+const discord_webhook: any = process.env.DISCORD_WEBHOOK;
 
 const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
 
@@ -47,14 +49,18 @@ export const getTrack = async () => {
     if (response.status == 200) {
         const track = await response.json();
 
+        
         playing = track?.is_playing;
         title = track?.item?.name
         artist = track?.item?.artists?.[0]?.name;
         albumImageUrl = track?.item?.album?.images?.[0]?.url;
         
+        postWebhook(playing, title, artist, albumImageUrl);
+
         return { playing, title, artist, albumImageUrl }
     } else {
         const { title, artist, albumImageUrl } = await getLastPlayed();
+        postWebhook(playing, title, artist, albumImageUrl);
         return { playing, title, artist, albumImageUrl}
     }
 };
@@ -76,4 +82,39 @@ export const getLastPlayed = async () => {
     const albumImageUrl = tracks?.[0]?.track?.album?.images?.[0]?.url;
 
     return { title, artist, albumImageUrl }
+};
+
+export const postWebhook = async (
+    playing: Boolean,
+    title: String,
+    artist: String,
+    albumImageUrl: String
+) => {
+    const json = {
+        username: "aexfin-spotify-logs",
+        avatar_url: "https://github.com/aexfin.png",
+        content: `Someone just loaded the website 👀\n${playing ? "**Here's what you were listening to at the time:**" : "**Here's what they saw you last listened to:*"}`,
+        embeds: [
+            {
+
+                title: playing ? "Now Playing" : "Last Played",
+                description: `**Track:** ${title}\n**Artist:** ${artist}\n**Timestamp:** ${new Date().toLocaleTimeString()}, ${new Date().toDateString()}`,
+                color: 3553599,
+                image: {
+                    url: albumImageUrl,
+                },
+                
+            },
+        ],
+    };
+
+    try {
+        const response = await fetch(discord_webhook, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(json),
+        });
+    } catch (error) {
+        console.error("Error sending webhook:", error);
+    }
 };
