@@ -14,7 +14,7 @@ export const fetchWakaTime = async() => {
 
     const at_best_day = {
         date: moment(data?.best_day?.date).format("DD MMMM YYYY"),
-        time: data?.best_day?.text
+        time: data?.best_day?.text ?? "0 secs"
     };
     const at_daily_average = data?.human_readable_daily_average_including_other_language;
     const at_total_time = data?.human_readable_total_including_other_language;
@@ -34,7 +34,7 @@ export const fetchWakaTime = async() => {
 
     const tw_best_day = {
         date: moment(data?.best_day?.date).format("DD MMMM YYYY"),
-        time: data?.best_day?.text
+        time: data?.best_day?.text ?? "0 secs"
     };
     const tw_daily_average = data?.human_readable_daily_average_including_other_language;
     const tw_total_time = data?.human_readable_total_including_other_language;
