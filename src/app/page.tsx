@@ -6,10 +6,13 @@ import { fetchWakaTime } from "./lib/wakatime";
 
 export default async function Home() {
   const descriptions = [
-    "एक सामान्य व्यक्ति",
-    "some description here",
-    "swooooosh",
-    "//",
+    // "एक सामान्य व्यक्ति",
+    // "some description here",
+    // "swooooosh",
+    // "//",
+    "[on vacation]",
+    "[touching some grass]",
+    "[out of my crib]"
   ];
   const selected =
     descriptions[Math.floor(Math.random() * descriptions.length)];
