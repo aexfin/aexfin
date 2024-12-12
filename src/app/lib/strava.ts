@@ -114,7 +114,6 @@ const defaultStats: Stats = {
   }
 };
 
-
 const supabase_url = String(process.env.SUPABASE_URL);
 const supabase_key = String(process.env.SUPABASE_KEY);
 
