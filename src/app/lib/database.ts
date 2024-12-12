@@ -31,11 +31,8 @@ export const fetchVisibilityConfigFromSupabase = async () => {
         .select("config")
         .eq("id", 1);
 
-    console.log(error);
-
     if (data && Array.isArray(data) && data.length > 0) {
             const config: Config = data[0].config;
-            console.log(config)
             return config
     } else {
       return defaultConfig
