@@ -27,7 +27,7 @@ export default async function Home() {
       <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 grid-rows-2 gap-4 items-center justify-center p-4">
         <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center col-span-1 row-span-1">
           <div
-            className={`absolute w-full h-full flex flex-col items-center justify-center bg-black z-50 ${
+            className={`absolute w-full h-full flex flex-col items-center justify-center pointer-events-none bg-black z-50 ${
               hidden.pfp ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -51,7 +51,7 @@ export default async function Home() {
         </div>
         <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center lg:col-span-2 row-span-1 py-4 md:py-0 lg:py-0">
           <div
-            className={`absolute w-full h-full flex flex-col items-center justify-center bg-black z-50 ${
+            className={`absolute w-full h-full flex flex-col items-center justify-center pointer-events-none bg-black z-50 ${
               hidden.desc ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -89,7 +89,7 @@ export default async function Home() {
         </div>
         <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center col-span-1 row-span-1">
           <div
-            className={`absolute w-full h-full flex flex-col items-center justify-center bg-black z-50 ${
+            className={`absolute w-full h-full flex flex-col items-center justify-center bg-black pointer-events-none z-50 ${
               hidden.socials ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -136,7 +136,7 @@ export default async function Home() {
         </div>
         <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
           <div
-            className={`absolute w-full h-full flex flex-col items-center justify-center bg-black z-50 ${
+            className={`absolute w-full h-full flex flex-col items-center justify-center pointer-events-none bg-black z-50 ${
               hidden.spotify ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -173,7 +173,7 @@ export default async function Home() {
         </div>
         <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
           <div
-            className={`absolute w-full h-full flex flex-col items-center justify-center bg-black z-50 ${
+            className={`absolute w-full h-full flex flex-col items-center justify-center pointer-events-none bg-black z-50 ${
               hidden.strava ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -296,7 +296,7 @@ export default async function Home() {
         </div>
         <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
           <div
-            className={`absolute w-full h-full flex flex-col items-center justify-center bg-black z-50 ${
+            className={`absolute w-full h-full flex flex-col items-center justify-center pointer-events-none bg-black z-50 ${
               hidden.stats ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -353,7 +353,7 @@ export default async function Home() {
         </div>
         <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center col-span-1 md:col-span-2 row-span-1">
           <div
-            className={`absolute w-full h-full flex flex-col items-center justify-center bg-black z-50 ${
+            className={`absolute w-full h-full flex flex-col items-center justify-center pointer-events-none bg-black z-50 ${
               hidden.langs ? "opacity-100" : "opacity-0"
             }`}
           >
