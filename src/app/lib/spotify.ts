@@ -92,7 +92,7 @@ export const postWebhook = async (
     const json = {
         username: "aexfin-web-spotify-logs",
         avatar_url: "https://github.com/aexfin.png",
-        content: `Someone just loaded the website 👀\n${playing ? "**Here's what you were listening to at the time:**" : "**Here's what they saw you last listened to:**"}`,
+        content: `<@&${process.env.WEB_PINGS_ROLE_ID}>\nSomeone just loaded the website 👀\n${playing ? "**Here's what you were listening to at the time:**" : "**Here's what they saw you last listened to:**"}`,
         embeds: [
             {
 
