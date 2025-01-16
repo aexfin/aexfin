@@ -5,20 +5,20 @@ type Config = {
   desc: boolean,
   socials: boolean,
   spotify: boolean,
-  strava: boolean,
+  artists: boolean,
   stats: boolean,
   langs: boolean
 }
 
 const defaultConfig: Config = {
-    pfp: true,
-    desc: true,
-    socials: true,
-    spotify: true,
-    strava: true,
-    stats: true,
-    langs: true
-  }
+    pfp: false,
+    desc: false,
+    socials: false,
+    spotify: false,
+    artists: false,
+    stats: false,
+    langs: false
+}
 
 const supabase_url = String(process.env.SUPABASE_URL);
 const supabase_key = String(process.env.SUPABASE_KEY);
@@ -28,7 +28,7 @@ export const fetchVisibilityConfigFromSupabase = async () => {
 
     const { data, error } = await supabase
         .from("visibility")
-        .select("config")
+        .select("config", { count: "exact" })
         .eq("id", 1);
 
     if (data && Array.isArray(data) && data.length > 0) {

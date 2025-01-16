@@ -10,6 +10,7 @@ const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
 const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
 export const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player";
 export const LAST_PLAYED_ENDPOINT = "https://api.spotify.com/v1/me/player/recently-played?limit=1";
+export const TOP_ARTIST_ENDPOINT = "https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=8";
 
 
 export const getAccessToken = async () => {
@@ -31,10 +32,14 @@ export const getAccessToken = async () => {
 
 
 export const getTrack = async () => {
-    let playing: Boolean = false;
-    let title: String;
-    let artist: String;
-    let albumImageUrl: String;
+    let playing: boolean = false;
+    let title: string;
+    let artist: string;
+    let album: string;
+    let albumImageUrl: string;
+    let trackUrl: string;
+    let artistUrl: string;
+    let albumUrl: string;
     
     const { access_token } = await getAccessToken();
     
@@ -47,20 +52,23 @@ export const getTrack = async () => {
     
     if (response.status == 200) {
         const track = await response.json();
-
         
         playing = track?.is_playing;
         title = track?.item?.name
         artist = track?.item?.artists?.[0]?.name;
+        album = track?.item?.album?.name;
         albumImageUrl = track?.item?.album?.images?.[0]?.url;
+        trackUrl = track?.item?.external_urls?.spotify;
+        artistUrl = track?.item?.artists?.[0]?.external_urls?.spotify;
+        albumUrl = track?.item?.album?.external_urls?.spotify;
         
         postWebhook(playing, title, artist, albumImageUrl);
 
-        return { playing, title, artist, albumImageUrl }
+        return { playing, title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl }
     } else {
-        const { title, artist, albumImageUrl } = await getLastPlayed();
+        const { title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl } = await getLastPlayed();
         postWebhook(playing, title, artist, albumImageUrl);
-        return { playing, title, artist, albumImageUrl}
+        return { playing, title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl}
     }
 };
 
@@ -78,10 +86,36 @@ export const getLastPlayed = async () => {
     const tracks = await data.items;
     const title = tracks?.[0]?.track?.name;
     const artist = tracks?.[0]?.track?.artists?.[0]?.name;
+    const album = tracks?.[0]?.track?.album?.name;
     const albumImageUrl = tracks?.[0]?.track?.album?.images?.[0]?.url;
+    const trackUrl = tracks?.[0]?.track.external_urls?.spotify;
+    const artistUrl = tracks?.[0]?.track.artists?.[0]?.external_urls?.spotify;
+    const albumUrl = tracks?.[0]?.track.album?.external_urls?.spotify;
+    console.log(album, trackUrl, artistUrl, albumUrl)
 
-    return { title, artist, albumImageUrl }
+    return { title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl };
 };
+
+
+export const fetchTopArtists = async () => {
+    const { access_token } = await getAccessToken();
+    const response = await fetch(TOP_ARTIST_ENDPOINT, {
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+        },
+        cache: "no-cache",
+    });
+    let data = await response.json();
+    data = data.items;
+    const artists = data.map((artist: any) => ({
+      name: artist?.name,
+      genre: artist?.genres?.[0],
+      image: artist?.images?.[0]?.url,
+      url: artist?.external_urls?.spotify,
+    }));
+    return artists
+}
+
 
 export const postWebhook = async (
     playing: Boolean,

@@ -1,11 +1,12 @@
-import { FaGithub, FaInstagram, FaDiscord, FaDribbble } from "react-icons/fa6";
+import { FaGithub, FaInstagram, FaDiscord, FaLastfm } from "react-icons/fa6";
 import { TbBrandStrava, TbCodeCircle, TbCodeAsterisk } from "react-icons/tb";
-import { getTrack } from "../app/lib/spotify";
+import { fetchTopArtists, getTrack } from "../app/lib/spotify";
 import { fetchFromSupabase } from "./lib/strava";
 import { fetchWakaTime } from "./lib/wakatime";
 import { fetchVisibilityConfigFromSupabase } from "./lib/database";
 
 export default async function Home() {
+  const artists = await fetchTopArtists();
   let hidden = await fetchVisibilityConfigFromSupabase();
   const descriptions = [
     // "एक सामान्य व्यक्ति",
@@ -19,13 +20,13 @@ export default async function Home() {
   const selected =
     descriptions[Math.floor(Math.random() * descriptions.length)];
   const age = 19;
-  const { playing, title, artist, albumImageUrl } = await getTrack();
+  const { playing, title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl } = await getTrack();
   const stats = await fetchFromSupabase();
   const wakatime = await fetchWakaTime();
   return (
     <main className="w-screen min-h-screen flex flex-col items-center justify-center">
-      <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 grid-rows-2 gap-4 items-center justify-center p-4">
-        <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center col-span-1 row-span-1">
+      <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 grid-rows-2 gap-2 items-center justify-center p-4">
+        <div className="relative w-full h-full flex flex-row overflow items-center justify-center col-span-1 row-span-1">
           <div
             className={`absolute w-full h-full flex flex-col items-center justify-center pointer-events-none bg-black z-50 ${
               hidden.pfp ? "opacity-100" : "opacity-0"
@@ -39,7 +40,7 @@ export default async function Home() {
           </div>
           <div
             title="not me"
-            className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 row-span-1"
+            className="w-full h-full flex flex-col border-2 border-black overflow-hidden items-center justify-center col-span-1 row-span-1"
           >
             <img
               src="https://github.com/aexfin.png"
@@ -49,7 +50,7 @@ export default async function Home() {
             />
           </div>
         </div>
-        <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center lg:col-span-2 row-span-1 py-4 md:py-0 lg:py-0">
+        <div className="relative w-full h-full flex flex-row overflow-hidden items-center justify-center lg:col-span-2 row-span-1 py-4 md:py-0 lg:py-0">
           <div
             className={`absolute w-full h-full flex flex-col items-center justify-center pointer-events-none bg-black z-50 ${
               hidden.desc ? "opacity-100" : "opacity-0"
@@ -61,7 +62,7 @@ export default async function Home() {
               (something's cooking here)
             </p>
           </div>
-          <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1 py-4 md:py-0 lg:py-0">
+          <div className="w-full h-full flex flex-col border-2 border-black overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1 py-4 md:py-0 lg:py-0">
             <div className="flex flex-col m-1 items-center justify-center">
               <h1 title="not my real name" className="text-2xl">
                 aexfin
@@ -71,23 +72,26 @@ export default async function Home() {
             <ul className="flex flex-row m-1 gap-2 items-center justify-center">
               <span
                 title="some random emoji"
-                className="text-xs px-1 py-0.5 bg-black grayscale brightness-200 rounded-sm"
+                className="text-xs px-1 py-0.5 bg-black grayscale brightness-200"
               >
                 👾
               </span>
-              <span className="text-xs px-1 py-0.5 bg-black text-slate-300 rounded-sm">
+              <span className="text-xs px-1 py-0.5 bg-black text-slate-300">
                 he/him
               </span>
-              <span className="text-xs px-1 py-0.5 bg-black text-slate-300 rounded-sm">
+              <span className="text-xs px-1 py-0.5 bg-black text-slate-300">
                 {age} y/o
               </span>
-              <span className="text-xs px-1 py-0.5 bg-black text-slate-300 rounded-sm">
+              <span
+                title="Mumbai, Maharashtra, India"
+                className="text-xs px-1 py-0.5 bg-black text-slate-300"
+              >
                 Mumbai, MH, IN
               </span>
             </ul>
           </div>
         </div>
-        <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center col-span-1 row-span-1">
+        <div className="relative w-full h-full flex flex-row overflow-hidden items-center justify-center col-span-1 row-span-1">
           <div
             className={`absolute w-full h-full flex flex-col items-center justify-center bg-black pointer-events-none z-50 ${
               hidden.socials ? "opacity-100" : "opacity-0"
@@ -99,12 +103,12 @@ export default async function Home() {
               (something's cooking here)
             </p>
           </div>
-          <div className="w-full h-full grid grid-cols-2 grid-rows-2 overflow-hidden items-center justify-center gap-4 col-span-1 row-span-1">
+          <div className="w-full h-full grid grid-cols-2 grid-rows-2 overflow-hidden items-center justify-center col-span-1 row-span-1">
             <a
               href="https://github.com/aexfin"
               target="_blank"
               title="GitHub"
-              className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md hover:bg-slate-400 active:scale-95"
+              className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black hover:bg-neutral-600"
             >
               <FaGithub className="text-3xl" />
             </a>
@@ -112,7 +116,7 @@ export default async function Home() {
               href="https://instagram.com/aexfin"
               target="_blank"
               title="Instagram"
-              className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md hover:bg-slate-400"
+              className="w-full h-full min-h-16 flex flex-row gap-2 border-y-2 border-r-2 border-black items-center justify-center bg-slate-50 text-black hover:bg-pink-500"
             >
               <FaInstagram className="text-3xl" />
             </a>
@@ -120,21 +124,21 @@ export default async function Home() {
               href="https://discord.com/users/1028983693269815296"
               target="_blank"
               title="Discord"
-              className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md hover:bg-slate-400 active:scale-95"
+              className="w-full h-full min-h-16 flex flex-row gap-2 border-x-2 border-b-2 border-black items-center justify-center bg-slate-50 text-black hover:bg-indigo-600"
             >
               <FaDiscord className="text-3xl" />
             </a>
             <a
-              href="https://dribbble.com/aexfin"
+              href="https://last.fm/user/carbongrated"
               target="_blank"
-              title="Dribbble"
-              className="w-full h-full min-h-16 flex flex-row gap-2 border-2 border-black items-center justify-center bg-slate-50 text-black rounded-md hover:bg-slate-400 active:scale-95"
+              title="Last.fm"
+              className="w-full h-full min-h-16 flex flex-row gap-2 border-r-2 border-b-2 border-black items-center justify-center bg-slate-50 text-black hover:bg-red-600"
             >
-              <FaDribbble className="text-3xl" />
+              <FaLastfm className="text-3xl" />
             </a>
           </div>
         </div>
-        <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
+        <div className="relative w-full h-full flex flex-row overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
           <div
             className={`absolute w-full h-full flex flex-col items-center justify-center pointer-events-none bg-black z-50 ${
               hidden.spotify ? "opacity-100" : "opacity-0"
@@ -146,35 +150,42 @@ export default async function Home() {
               (something's cooking here)
             </p>
           </div>
-          <div className="w-full h-full flex flex-row border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
+          <div className="w-full h-full flex flex-row border-2 border-black overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
             <div
-              title={title}
+              title={album}
               className="w-full h-full flex flex-col overflow-hidden border-r-2 border-black items-center justify-center"
             >
-              <img
-                src={albumImageUrl}
-                className={`pointer-events-none object-cover scale-100 ${
-                  playing ? "" : "grayscale"
-                }`}
-                alt={title}
-                loading="lazy"
-              />
+              <a href={albumUrl} target="_blank">
+                <img
+                  src={albumImageUrl}
+                  className={`pointer-events-none object-cover scale-100 ${
+                    playing ? "" : "grayscale"
+                  }`}
+                  alt={title}
+                  loading="lazy"
+                />
+              </a>
             </div>
             <div className="w-full h-full flex flex-col overflow-hidden items-center justify-center">
               <p className="text-xs text-neutral-600">
                 {playing ? "Listening to" : "Last played"}
               </p>
-              <h1>{title}</h1>
+              <a href={trackUrl} target="_blank">
+                {title}
+              </a>
               <p className="text-xs text-neutral-600">
-                by {""} <span className="text-black">{artist}</span>
+                by {""}{" "}
+                <a href={artistUrl} target="_blank" className="text-black">
+                  {artist}
+                </a>
               </p>
             </div>
           </div>
         </div>
-        <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
+        <div className="relative w-full h-full flex flex-row overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
           <div
             className={`absolute w-full h-full flex flex-col items-center justify-center pointer-events-none bg-black z-50 ${
-              hidden.strava ? "opacity-100" : "opacity-0"
+              hidden.artists ? "opacity-100" : "opacity-0"
             }`}
           >
             <p className="text-sm text-neutral-400">
@@ -183,118 +194,34 @@ export default async function Home() {
               (something's cooking here)
             </p>
           </div>
-          <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
-            <div className="w-full h-auto flex flex-row border-b-2 border-black items-center justify-center p-2 gap-2">
-              <TbBrandStrava />
-              <h1>Strava Statistics</h1>
-            </div>
-            <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 p-2">
-              <div
-                title="Last 4 weeks"
-                className="w-full h-full flex flex-col items-center justify-center"
-              >
-                <h3>Recent Runs</h3>
-                <p className="text-sm text-neutral-600">
-                  Count: {stats?.recent_runs?.count}
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Distance: {stats?.recent_runs?.distance} kms
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Time: {stats?.recent_runs?.time?.hours}:
-                  {stats?.recent_runs?.time?.minutes}:
-                  {stats?.recent_runs?.time?.seconds}
-                </p>
-              </div>
-              <div
-                title="Last 4 weeks"
-                className="w-full h-full flex flex-col items-center justify-center"
-              >
-                <h3>Recent Bikings</h3>
-                <p className="text-sm text-neutral-600">
-                  Count: {stats?.recent_rides?.count}
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Distance: {stats?.recent_rides?.distance} kms
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Time: {stats?.recent_rides?.time?.hours}:
-                  {stats?.recent_rides?.time?.minutes}:
-                  {stats?.recent_rides?.time?.seconds}
-                </p>
-              </div>
-              <div
-                title="Last 4 weeks"
-                className="w-full h-full flex flex-col items-center justify-center"
-              >
-                <h3>Recent Swims</h3>
-                <p className="text-sm text-neutral-600">
-                  Count: {stats?.recent_swims?.count}
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Distance: {stats?.recent_swims?.distance} kms
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Time: {stats?.recent_swims?.time?.hours}:
-                  {stats?.recent_swims?.time?.minutes}:
-                  {stats?.recent_swims?.time?.seconds}
-                </p>
-              </div>
-              <div
-                title="All time"
-                className="w-full h-full flex flex-col items-center justify-center"
-              >
-                <h3>Total Runs</h3>
-                <p className="text-sm text-neutral-600">
-                  Count: {stats?.total_runs?.count}
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Distance: {stats?.total_runs?.distance} kms
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Time: {stats?.total_runs?.time?.hours}:
-                  {stats?.total_runs?.time?.minutes}:
-                  {stats?.total_runs?.time?.seconds}
-                </p>
-              </div>
-              <div
-                title="All time"
-                className="w-full h-full flex flex-col items-center justify-center"
-              >
-                <h3>Total Bikings</h3>
-                <p className="text-sm text-neutral-600">
-                  Count: {stats?.total_rides?.count}
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Distance: {stats?.total_rides?.distance} kms
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Time: {stats?.total_rides?.time?.hours}:
-                  {stats?.total_rides?.time?.minutes}:
-                  {stats?.total_rides?.time?.seconds}
-                </p>
-              </div>
-              <div
-                title="All time"
-                className="w-full h-full flex flex-col items-center justify-center"
-              >
-                <h3>Total Swims</h3>
-                <p className="text-sm text-neutral-600">
-                  Count: {stats?.total_swims?.count}
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Distance: {stats?.total_swims?.distance} kms
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Time: {stats?.total_swims?.time?.hours}:
-                  {stats?.total_swims?.time?.minutes}:
-                  {stats?.total_swims?.time?.seconds}
-                </p>
-              </div>
+          <div className="w-full h-full flex flex-col border-2 border-black overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
+            <div className="w-full h-full grid grid-cols-2 lg:grid-cols-4">
+              {artists.map((artist: any, index: any) => (
+                <div
+                  key={index}
+                  className="relative w-full aspect-w-1 aspect-h-1 outline outline-2 outline-black"
+                >
+                  <a
+                    title={`${artist.name} on Spotify`}
+                    href={artist.url}
+                    target="_blank"
+                    className="absolute w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-75 opacity-0 hover:opacity-100 z-10"
+                  >
+                    <p className="text-sm text-white">{artist.name}</p>
+                    <p className="text-xs text-neutral-400">{artist.genre}</p>
+                  </a>
+                  <img
+                    className="absolute inset-0 w-full h-full object-cover hover:opacity-55 transition-opacity duration-300"
+                    src={artist.image}
+                    alt={artist.name}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
+        <div className="relative w-full h-full flex flex-row overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
           <div
             className={`absolute w-full h-full flex flex-col items-center justify-center pointer-events-none bg-black z-50 ${
               hidden.stats ? "opacity-100" : "opacity-0"
@@ -306,7 +233,7 @@ export default async function Home() {
               (something's cooking here)
             </p>
           </div>
-          <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
+          <div className="w-full h-full flex flex-col border-2 border-black overflow-hidden items-center justify-center col-span-1 lg:col-span-2 row-span-1">
             <div className="w-full h-auto flex flex-row border-b-2 border-black items-center justify-center p-2 gap-2">
               <TbCodeCircle />
               <h1>Coding Statistics</h1>
@@ -351,7 +278,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <div className="relative w-full h-full flex flex-row rounded-lg overflow-hidden items-center justify-center col-span-1 md:col-span-2 row-span-1">
+        <div className="relative w-full h-full flex flex-row overflow-hidden items-center justify-center col-span-1 md:col-span-2 row-span-1">
           <div
             className={`absolute w-full h-full flex flex-col items-center justify-center pointer-events-none bg-black z-50 ${
               hidden.langs ? "opacity-100" : "opacity-0"
@@ -363,7 +290,7 @@ export default async function Home() {
               (something's cooking here)
             </p>
           </div>
-          <div className="w-full h-full flex flex-col border-2 border-black rounded-lg overflow-hidden items-center justify-center col-span-1 md:col-span-2 row-span-1">
+          <div className="w-full h-full flex flex-col border-2 border-black overflow-hidden items-center justify-center col-span-1 md:col-span-2 row-span-1">
             <div className="w-full h-auto flex flex-row border-b-2 border-black items-center justify-center py-2 gap-2">
               <TbCodeAsterisk />
               <h1>Language Statistics</h1>
