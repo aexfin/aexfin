@@ -20,7 +20,7 @@ export default async function Home() {
   const selected =
     descriptions[Math.floor(Math.random() * descriptions.length)];
   const age = 19;
-  const { playing, title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl } = await getTrack();
+  const { playing, title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl, played_at } = await getTrack();
   const stats = await fetchFromSupabase();
   const wakatime = await fetchWakaTime();
   return (
@@ -179,6 +179,9 @@ export default async function Home() {
                   {artist}
                 </a>
               </p>
+              {!playing && (
+                <p className="text-xs text-neutral-600">{played_at}</p>
+              )}
             </div>
           </div>
         </div>

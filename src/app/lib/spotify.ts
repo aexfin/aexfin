@@ -1,5 +1,7 @@
 import querystring from "querystring";
 
+import { formatDistanceToNow } from "date-fns";
+
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
@@ -40,6 +42,7 @@ export const getTrack = async () => {
     let trackUrl: string;
     let artistUrl: string;
     let albumUrl: string;
+    let played_at = undefined;
     
     const { access_token } = await getAccessToken();
     
@@ -54,21 +57,28 @@ export const getTrack = async () => {
         const track = await response.json();
         
         playing = track?.is_playing;
-        title = track?.item?.name
-        artist = track?.item?.artists?.[0]?.name;
-        album = track?.item?.album?.name;
-        albumImageUrl = track?.item?.album?.images?.[0]?.url;
-        trackUrl = track?.item?.external_urls?.spotify;
-        artistUrl = track?.item?.artists?.[0]?.external_urls?.spotify;
-        albumUrl = track?.item?.album?.external_urls?.spotify;
-        
-        postWebhook(playing, title, artist, albumImageUrl);
 
-        return { playing, title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl }
-    } else {
-        const { title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl } = await getLastPlayed();
+        if(playing) {
+            title = track?.item?.name
+            artist = track?.item?.artists?.[0]?.name;
+            album = track?.item?.album?.name;
+            albumImageUrl = track?.item?.album?.images?.[0]?.url;
+            trackUrl = track?.item?.external_urls?.spotify;
+            artistUrl = track?.item?.artists?.[0]?.external_urls?.spotify;
+            albumUrl = track?.item?.album?.external_urls?.spotify;
+            
+            postWebhook(playing, title, artist, albumImageUrl);
+    
+            return { playing, title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl, played_at };
+        } else {
+            const { title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl, played_at } = await getLastPlayed();
         postWebhook(playing, title, artist, albumImageUrl);
-        return { playing, title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl}
+        return { playing, title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl, played_at}
+        }
+    } else {
+        const { title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl, played_at } = await getLastPlayed();
+        postWebhook(playing, title, artist, albumImageUrl);
+        return { playing, title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl, played_at}
     }
 };
 
@@ -91,9 +101,10 @@ export const getLastPlayed = async () => {
     const trackUrl = tracks?.[0]?.track.external_urls?.spotify;
     const artistUrl = tracks?.[0]?.track.artists?.[0]?.external_urls?.spotify;
     const albumUrl = tracks?.[0]?.track.album?.external_urls?.spotify;
-    console.log(album, trackUrl, artistUrl, albumUrl)
+    let played_at = tracks?.[0]?.played_at;
+    played_at = formatDistanceToNow(new Date(played_at), { addSuffix: true });
 
-    return { title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl };
+    return { title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl, played_at };
 };
 
 
