@@ -13,13 +13,16 @@ export default async function Home() {
     // "some description here",
     // "swooooosh",
     // "//",
-    "[on vacation]",
-    "[touching some grass]",
-    "[out of my crib]"
+    // "[on vacation]",
+    // "[touching some grass]",
+    // "[out of my crib]"
+    "birthday!!!",
+    "finally out of teenage!!",
+    "20 lessgoooo"
   ];
   const selected =
     descriptions[Math.floor(Math.random() * descriptions.length)];
-  const age = 19;
+  const age = 20;
   const { playing, title, artist, album, albumImageUrl, trackUrl, artistUrl, albumUrl, played_at } = await getTrack();
   const stats = await fetchFromSupabase();
   const wakatime = await fetchWakaTime();
@@ -71,10 +74,10 @@ export default async function Home() {
             </div>
             <ul className="flex flex-row m-1 gap-2 items-center justify-center">
               <span
-                title="some random emoji"
+                title="birthday yay!!!"
                 className="text-xs px-1 py-0.5 bg-black grayscale brightness-200"
               >
-                👾
+                🎉
               </span>
               <span className="text-xs px-1 py-0.5 bg-black text-slate-300">
                 he/him
