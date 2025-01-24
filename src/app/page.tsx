@@ -13,12 +13,9 @@ export default async function Home() {
     // "some description here",
     // "swooooosh",
     // "//",
-    // "[on vacation]",
-    // "[touching some grass]",
-    // "[out of my crib]"
-    "birthday!!!",
-    "finally out of teenage!!",
-    "20 lessgoooo"
+    "[on vacation]",
+    "[touching some grass]",
+    "[out of my crib]"
   ];
   const selected =
     descriptions[Math.floor(Math.random() * descriptions.length)];
@@ -74,10 +71,10 @@ export default async function Home() {
             </div>
             <ul className="flex flex-row m-1 gap-2 items-center justify-center">
               <span
-                title="birthday yay!!!"
+                title="some random emoji"
                 className="text-xs px-1 py-0.5 bg-black grayscale brightness-200"
               >
-                🎉
+                👾
               </span>
               <span className="text-xs px-1 py-0.5 bg-black text-slate-300">
                 he/him
